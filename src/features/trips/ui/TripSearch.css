@@ -1,0 +1,13 @@
+.trip-search {
+  display: grid;
+  gap: 1rem;
+  max-width: 58rem;
+  padding: 1.25rem;
+}
+
+@media (min-width: 44rem) {
+  .trip-search {
+    grid-template-columns: repeat(3, 1fr) auto;
+    align-items: end;
+  }
+}

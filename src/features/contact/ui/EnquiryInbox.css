@@ -1,0 +1,11 @@
+.enquiry-inbox {
+  overflow-x: auto;
+}
+
+.enquiry-inbox__hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}

@@ -1,0 +1,25 @@
+.seat-map {
+  display: grid;
+  gap: 5px;
+  padding: 0.7rem 0.6rem;
+  border: 2px solid var(--line-strong);
+  border-radius: 1.1rem 1.1rem 0.6rem 0.6rem;
+}
+
+.seat-map__row,
+.seat-map__side {
+  display: flex;
+  gap: 4px;
+}
+
+/* the wider gap is the aisle */
+.seat-map__row {
+  gap: 12px;
+}
+
+.seat-map i {
+  width: 13px;
+  height: 15px;
+  border-radius: 4px 4px 2px 2px;
+  background: var(--teal);
+}

@@ -1,0 +1,22 @@
+.section {
+  max-width: 72rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: clamp(5rem, 12vh, 8rem) var(--gutter) calc(var(--road-h) + 4rem);
+}
+
+.section__board {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem 1.4rem;
+  border-radius: 0.5rem;
+  background: var(--sign);
+  /* the white line set in from the edge, as on a highway signboard */
+  box-shadow:
+    inset 0 0 0 4px var(--sign),
+    inset 0 0 0 6px var(--white);
+  color: var(--white);
+  font: 700 clamp(1.6rem, 4vw, 2.6rem) / 1.1 var(--display);
+  font-stretch: 80%;
+}

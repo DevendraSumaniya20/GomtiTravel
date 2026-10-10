@@ -1,0 +1,16 @@
+.contact-card,
+.contact-card dl {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.contact-card dt {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.contact-card dd {
+  overflow-wrap: anywhere;
+}

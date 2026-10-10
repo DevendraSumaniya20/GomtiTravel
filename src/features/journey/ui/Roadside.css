@@ -1,0 +1,20 @@
+.roadside {
+  position: absolute;
+  left: 0;
+  bottom: var(--road-h);
+  height: clamp(6rem, 22vh, 11rem);
+  /* the drawing is 12 times as wide as it is tall */
+  aspect-ratio: 12;
+  fill: var(--silhouette);
+}
+
+.roadside__flag {
+  fill: var(--marigold);
+}
+
+.roadside__blades {
+  fill: none;
+  stroke: var(--silhouette);
+  stroke-width: 4;
+  stroke-linecap: round;
+}

@@ -1,0 +1,28 @@
+.booking-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 52rem;
+}
+
+.booking-form__result {
+  font-weight: 600;
+}
+
+.booking-form__result:empty {
+  display: none;
+}
+
+@media (min-width: 44rem) {
+  .booking-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .booking-form__route,
+  .booking-form__result {
+    grid-column: 1 / -1;
+  }
+
+  .booking-form .btn {
+    justify-self: start;
+  }
+}

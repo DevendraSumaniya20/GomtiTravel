@@ -1,0 +1,32 @@
+.booking-lookup {
+  display: grid;
+  gap: 1rem;
+  max-width: 52rem;
+}
+
+.booking-lookup__result {
+  display: grid;
+  justify-items: start;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.booking-lookup__result:empty {
+  display: none;
+}
+
+.booking-lookup__policy {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 44rem) {
+  .booking-lookup {
+    grid-template-columns: 1fr 1fr auto;
+    align-items: end;
+  }
+
+  .booking-lookup > :not(label, .btn) {
+    grid-column: 1 / -1;
+  }
+}

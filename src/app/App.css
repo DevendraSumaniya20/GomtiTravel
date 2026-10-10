@@ -1,0 +1,42 @@
+.app__header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem var(--gutter);
+}
+
+.app__brand {
+  font: 700 1.5rem/1 var(--display);
+  letter-spacing: -0.02em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* the page ends at dawn, so the footer text is ink */
+.app__footer {
+  /* room below keeps the text in open sky, above the turbines */
+  padding: 2rem var(--gutter) calc(var(--road-h) + 32vh);
+  color: var(--ink);
+  text-align: center;
+}
+
+.app__footer a {
+  color: inherit;
+}
+
+.app__stack,
+.app__pair {
+  display: grid;
+  align-items: start;
+  gap: 1.25rem;
+}
+
+@media (min-width: 60rem) {
+  .app__pair {
+    grid-template-columns: 1fr 1.6fr;
+  }
+}

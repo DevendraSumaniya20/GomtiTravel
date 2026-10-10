@@ -1,0 +1,74 @@
+.timetable__filter {
+  margin-bottom: 1rem;
+}
+
+.timetable__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.timetable__row:first-child {
+  border-top: 0;
+}
+
+.timetable__row .btn {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.timetable__place {
+  display: grid;
+}
+
+.timetable__place strong {
+  font: 650 1.35rem/1.2 var(--display);
+}
+
+.timetable__place span,
+.timetable__duration,
+.timetable__coach {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.timetable__time {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.timetable__line {
+  flex: 1;
+  min-width: 1.5rem;
+  max-width: 5rem;
+  border-top: 2px dashed var(--line-strong);
+}
+
+.timetable__fare {
+  font: 650 1.25rem var(--display);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 60rem) {
+  .timetable__row {
+    grid-template-columns: 1.3fr 1.6fr 0.8fr auto auto;
+    gap: 1.25rem;
+  }
+
+  .timetable__row .btn,
+  .timetable__time {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .timetable__fare {
+    min-width: 4.5rem;
+    text-align: right;
+  }
+}

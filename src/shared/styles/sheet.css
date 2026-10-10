@@ -1,0 +1,10 @@
+/* An opaque paper surface. Always light, so text on it is always ink. */
+.sheet {
+  border: 1px solid var(--line-strong);
+  border-radius: 0.75rem;
+  background: var(--paper);
+}
+
+.pane {
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}

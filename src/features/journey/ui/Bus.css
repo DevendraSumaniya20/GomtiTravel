@@ -1,0 +1,75 @@
+.bus {
+  display: block;
+  overflow: visible;
+}
+
+.bus__shadow {
+  fill: var(--bus-shadow);
+}
+
+.bus__beam-near {
+  stop-color: var(--bus-beam);
+  stop-opacity: 0.9;
+}
+
+.bus__beam-far {
+  stop-color: var(--bus-beam);
+  stop-opacity: 0;
+}
+
+.bus__body {
+  fill: var(--bus-body);
+}
+
+.bus__roof,
+.bus__arch {
+  fill: var(--bus-roof);
+}
+
+.bus__skirt {
+  fill: var(--bus-skirt);
+}
+
+.bus__stripe,
+.bus__lamp {
+  fill: var(--bus-stripe);
+}
+
+.bus__glass {
+  fill: var(--bus-glass);
+}
+
+.bus__pillars {
+  stroke: var(--bus-body);
+  stroke-width: 4;
+}
+
+.bus__mirror {
+  fill: none;
+  stroke: var(--bus-roof);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.bus__name {
+  fill: var(--ink);
+  font: 700 9px var(--display);
+  letter-spacing: 1.5px;
+}
+
+.bus__brake {
+  fill: var(--bus-brake);
+}
+
+.bus__tyre {
+  fill: var(--ink);
+}
+
+.bus__hub {
+  fill: var(--bus-hub);
+}
+
+.bus__spoke {
+  stroke: var(--bus-spoke);
+  stroke-width: 2;
+}

@@ -1,0 +1,32 @@
+.coach-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.coach-list__coach {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.coach-list__capacity {
+  color: var(--ink-soft);
+}
+
+.coach-list__notes {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.coach-list__notes li {
+  padding-left: 1.3rem;
+  background: radial-gradient(circle at 0.35rem 0.75em, var(--marigold) 0.3rem, transparent 0.32rem);
+}
+
+@media (min-width: 60rem) {
+  .coach-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

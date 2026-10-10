@@ -1,0 +1,144 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--sky-fallback);
+  color: var(--ink);
+  font: 1.0625rem/1.55 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h3 {
+  font: 650 1.4rem/1.2 var(--display);
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--white);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background: var(--yellow-deep);
+}
+
+.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--teal);
+  font-weight: 650;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.5rem;
+  background: var(--field);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+input[readonly] {
+  background: var(--field-locked);
+}
+
+textarea {
+  padding-block: 0.7rem;
+  resize: vertical;
+}
+
+input[type='checkbox'] {
+  width: 1.4rem;
+  min-height: 1.4rem;
+  padding: 0;
+  accent-color: var(--teal);
+}
+
+/* Rows of records. Wrap in an element with overflow-x: auto on narrow screens. */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.7rem 1rem 0.7rem 0;
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.data-table thead th {
+  border-top: 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}

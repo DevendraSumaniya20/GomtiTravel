@@ -1,0 +1,10 @@
+.contact-details-form {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  max-width: 34rem;
+}
+
+.contact-details-form label {
+  width: 100%;
+}
