@@ -25,13 +25,15 @@
 }
 
 .timetable__place strong {
-  font: 650 1.35rem/1.2 var(--display);
+  font: 400 clamp(1.7rem, 3vw, 2.4rem) / 1.1 var(--display);
 }
 
 .timetable__place span,
 .timetable__duration,
 .timetable__coach {
-  font-size: 0.92rem;
+  font: 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--ink-soft);
 }
 
@@ -40,7 +42,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-variant-numeric: tabular-nums;
+  font: 0.95rem var(--mono);
 }
 
 .timetable__line {
@@ -51,8 +53,7 @@
 }
 
 .timetable__fare {
-  font: 650 1.25rem var(--display);
-  font-variant-numeric: tabular-nums;
+  font: 1.05rem var(--mono);
 }
 
 @media (min-width: 60rem) {

@@ -9,7 +9,7 @@
 
 .bus__beam-near {
   stop-color: var(--bus-beam);
-  stop-opacity: 0.9;
+  stop-opacity: 0.85;
 }
 
 .bus__beam-far {
@@ -17,59 +17,80 @@
   stop-opacity: 0;
 }
 
-.bus__body {
-  fill: var(--bus-body);
+.bus__body-top {
+  stop-color: var(--bus-body-top);
 }
 
-.bus__roof,
-.bus__arch {
-  fill: var(--bus-roof);
+.bus__body-bottom {
+  stop-color: var(--bus-body-bottom);
 }
 
-.bus__skirt {
-  fill: var(--bus-skirt);
+.bus__glass-top {
+  stop-color: var(--bus-glass-top);
 }
 
-.bus__stripe,
-.bus__lamp {
+.bus__glass-bottom {
+  stop-color: var(--bus-glass-bottom);
+}
+
+.bus__rim-light {
+  stop-color: var(--bus-rim-light);
+}
+
+.bus__rim-dark {
+  stop-color: var(--bus-rim-dark);
+}
+
+.bus__dark {
+  fill: var(--bus-dark);
+}
+
+.bus__livery {
+  fill: var(--bus-livery);
+}
+
+.bus__stripe {
+  fill: none;
+  stroke: var(--bus-stripe);
+  stroke-width: 6;
+}
+
+.bus__stripe-fill {
   fill: var(--bus-stripe);
 }
 
-.bus__glass {
-  fill: var(--bus-glass);
-}
-
 .bus__pillars {
-  stroke: var(--bus-body);
-  stroke-width: 4;
+  stroke: var(--bus-body-top);
+  stroke-width: 8;
 }
 
-.bus__mirror {
-  fill: none;
-  stroke: var(--bus-roof);
-  stroke-width: 3;
-  stroke-linecap: round;
+.bus__shine {
+  fill: var(--bus-shine);
 }
 
 .bus__name {
-  fill: var(--ink);
-  font: 700 9px var(--display);
-  letter-spacing: 1.5px;
+  fill: var(--bus-dark);
+  font: 500 17px var(--body);
+  letter-spacing: 5px;
+}
+
+.bus__bays {
+  fill: none;
+  stroke: var(--bus-shine);
+  stroke-width: 1.5;
+}
+
+.bus__lamp {
+  fill: var(--bus-beam);
 }
 
 .bus__brake {
   fill: var(--bus-brake);
 }
 
-.bus__tyre {
-  fill: var(--ink);
-}
-
-.bus__hub {
-  fill: var(--bus-hub);
-}
-
-.bus__spoke {
-  stroke: var(--bus-spoke);
-  stroke-width: 2;
+.bus__mirror {
+  fill: none;
+  stroke: var(--bus-dark);
+  stroke-width: 5;
+  stroke-linecap: round;
 }

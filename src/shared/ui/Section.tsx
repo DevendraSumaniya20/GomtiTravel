@@ -4,15 +4,22 @@ import './Section.css'
 type SectionProps = {
   id: string
   title: string
+  /** One or two sentences under the title. */
+  lede?: string
+  /** A dark band flips paper and ink for everything inside it. */
+  tone?: 'light' | 'dark'
   children: ReactNode
 }
 
-/** A full-height page section whose title sits on a green highway signboard so it reads on every sky. */
-export function Section({ id, title, children }: SectionProps) {
+/** A page section: a large serif title, an indented lede, then the content. */
+export function Section({ id, title, lede, tone = 'light', children }: SectionProps) {
   return (
-    <section id={id} className="section">
-      <h2 className="section__board">{title}</h2>
-      {children}
+    <section id={id} className={tone === 'dark' ? 'section section--dark' : 'section'}>
+      <div className="section__inner">
+        <h2 className="section__title">{title}</h2>
+        {lede && <p className="section__lede">{lede}</p>}
+        {children}
+      </div>
     </section>
   )
 }

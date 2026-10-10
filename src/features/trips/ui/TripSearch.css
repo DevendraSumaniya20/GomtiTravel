@@ -1,8 +1,9 @@
 .trip-search {
   display: grid;
   gap: 1rem;
-  max-width: 58rem;
-  padding: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
 }
 
 @media (min-width: 44rem) {

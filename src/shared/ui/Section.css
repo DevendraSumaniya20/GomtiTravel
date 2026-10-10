@@ -1,22 +1,40 @@
 .section {
-  max-width: 72rem;
-  min-height: 100vh;
-  min-height: 100svh;
-  margin: 0 auto;
-  padding: clamp(5rem, 12vh, 8rem) var(--gutter) calc(var(--road-h) + 4rem);
+  padding: clamp(4.5rem, 11vw, 9rem) var(--gutter);
+  background: var(--paper);
+  color: var(--ink);
 }
 
-.section__board {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  padding: 0.8rem 1.4rem;
-  border-radius: 0.5rem;
-  background: var(--sign);
-  /* the white line set in from the edge, as on a highway signboard */
-  box-shadow:
-    inset 0 0 0 4px var(--sign),
-    inset 0 0 0 6px var(--white);
-  color: var(--white);
-  font: 700 clamp(1.6rem, 4vw, 2.6rem) / 1.1 var(--display);
-  font-stretch: 80%;
+.section--dark {
+  --paper: var(--dark-paper);
+  --ink: var(--dark-ink);
+  --ink-soft: var(--dark-ink-soft);
+  --line: var(--dark-line);
+  --line-strong: var(--dark-line-strong);
+  /* native date pickers and select menus follow */
+  color-scheme: dark;
+}
+
+.section__inner {
+  max-width: 84rem;
+  margin: 0 auto;
+}
+
+.section__title {
+  font: 300 clamp(2.9rem, 9vw, 7.4rem) / 0.95 var(--display);
+  text-transform: uppercase;
+}
+
+.section__lede {
+  max-width: 44rem;
+  margin: 1.5rem 0 clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  line-height: 1.5;
+}
+
+@media (min-width: 60rem) {
+  /* the lede hangs to the right of the title, its first line indented further */
+  .section__lede {
+    margin-left: 26%;
+    text-indent: 11rem;
+  }
 }

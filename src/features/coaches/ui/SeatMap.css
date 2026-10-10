@@ -2,8 +2,8 @@
   display: grid;
   gap: 5px;
   padding: 0.7rem 0.6rem;
-  border: 2px solid var(--line-strong);
-  border-radius: 1.1rem 1.1rem 0.6rem 0.6rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.9rem 0.9rem 0.2rem 0.2rem;
 }
 
 .seat-map__row,
@@ -20,6 +20,6 @@
 .seat-map i {
   width: 13px;
   height: 15px;
-  border-radius: 4px 4px 2px 2px;
-  background: var(--teal);
+  border-radius: 3px 3px 1px 1px;
+  background: var(--ink);
 }

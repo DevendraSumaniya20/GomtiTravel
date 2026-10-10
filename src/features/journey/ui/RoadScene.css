@@ -1,0 +1,84 @@
+.road-scene {
+  /* the road's share of the scene's height */
+  --scene-road: 17%;
+  /* the drawing's width; the coach body is 79% of it, the rest is headlight beam */
+  --scene-bus: min(118vw, 78rem);
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.road-scene--dusk {
+  background: var(--sky-dusk);
+}
+
+.road-scene--dawn {
+  background: var(--sky-dawn);
+}
+
+.road-scene__stars {
+  position: absolute;
+  inset: 0 0 45%;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, var(--white), transparent),
+    radial-gradient(1px 1px at 27% 62%, var(--white), transparent),
+    radial-gradient(2px 2px at 41% 22%, var(--white), transparent),
+    radial-gradient(1px 1px at 58% 50%, var(--white), transparent),
+    radial-gradient(1.5px 1.5px at 69% 14%, var(--white), transparent),
+    radial-gradient(1px 1px at 83% 66%, var(--white), transparent),
+    radial-gradient(2px 2px at 92% 34%, var(--white), transparent),
+    radial-gradient(1px 1px at 6% 80%, var(--white), transparent);
+}
+
+.road-scene--dawn .road-scene__stars,
+.road-scene--dawn .bus__beam {
+  display: none;
+}
+
+/* the moon at dusk, the sun at dawn */
+.road-scene__orb {
+  position: absolute;
+  right: 12%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.road-scene--dusk .road-scene__orb {
+  top: 41%;
+  width: clamp(2.75rem, 5vw, 4.25rem);
+  background: var(--moon);
+  box-shadow: 0 0 50px 10px var(--moon-glow);
+}
+
+.road-scene--dawn .road-scene__orb {
+  bottom: calc(var(--scene-road) + 6%);
+  width: clamp(5rem, 11vw, 9rem);
+  background: var(--sun);
+  box-shadow: 0 0 80px 30px var(--sun-glow);
+}
+
+.road-scene__sea {
+  position: absolute;
+  inset: auto 0 var(--scene-road);
+  height: 13%;
+  background: var(--sea);
+}
+
+/* the asphalt, a verge above it, and a dashed centre line */
+.road-scene__road {
+  position: absolute;
+  inset: auto 0 0;
+  height: var(--scene-road);
+  border-top: 0.6rem solid var(--ground);
+  background:
+    repeating-linear-gradient(90deg, var(--white) 0 2.5rem, transparent 2.5rem 5rem) 0 58% / 100% 3px no-repeat,
+    var(--asphalt);
+}
+
+.road-scene__bus {
+  position: absolute;
+  left: 0;
+  bottom: 8.5%;
+  width: var(--scene-bus);
+  will-change: transform;
+}

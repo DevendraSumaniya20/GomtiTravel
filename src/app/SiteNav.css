@@ -1,0 +1,43 @@
+.site-nav {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  padding: 1.1rem var(--gutter);
+}
+
+.site-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2rem;
+  color: var(--white);
+  font: 400 1.05rem var(--body);
+  text-decoration: none;
+}
+
+.site-nav a::before {
+  content: '+';
+  font-weight: 300;
+}
+
+.site-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+@media (min-width: 60rem) {
+  /* Stays in view on wide screens. White with a difference blend reads on the scene, the paper and the dark band alike. */
+  .site-nav {
+    position: fixed;
+    gap: 3rem;
+    mix-blend-mode: difference;
+  }
+
+  /* the last two links sit at the right, apart from the rest */
+  .site-nav a:nth-last-child(2) {
+    margin-left: auto;
+  }
+}

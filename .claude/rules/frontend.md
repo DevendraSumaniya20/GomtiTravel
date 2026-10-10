@@ -19,8 +19,9 @@ paths:
 - No raw colours or font names outside the tokens file.
 - Class names are scoped by component: `.timetable`, `.timetable__fare`. Shared primitives are `.sheet`, `.pane`, `.btn`, `.link`, `.data-table`.
 - Layout is mobile-first. Breakpoints are 44rem and 60rem. Do not add others.
-- Content sits on opaque paper `.sheet` panes with ink text. No blur, no drop shadows, no hover effects on panes. Text that sits straight on the sky goes on the green `.section__board` signboard, because the sky changes from dusk to night to dawn; the hero is the one exception and is white on the dusk sky.
-- The look comes from the Gujarat highway: milestone yellow for actions, signboard green for titles, the display face condensed with `font-stretch`.
+- The look is editorial: warm paper, soft black ink, one dark band. No cards, no shadows, no rounded panels: content sits on the page under a hairline rule (`.sheet`).
+- Three typefaces with fixed roles: Cormorant Garamond (light, capitals) for section titles and names, Outfit for text and the wordmark, Space Mono capitals for small labels and figures.
+- A dark band is `Section tone="dark"`. It remaps `--paper`, `--ink` and `--line`, so components need no dark variant; never hard-code a light or dark colour in a component.
 - No UI kit and no CSS framework without discussion.
 
 ## Accessibility
@@ -35,12 +36,12 @@ paths:
 - Import GSAP only from `shared/motion/gsap.ts`, which registers the plugins once.
 - Build animations inside `useGSAP` with a `scope` ref so they are reverted on unmount.
 - Entrance animations are wrapped in `withMotion` and animate *from* an offset; the final state is written in CSS, so the page is complete if no animation runs.
-- Scroll-linked position (the bus, the sky) follows the person's own scrolling and runs for everyone. Smooth scrolling and entrances do not run under `prefers-reduced-motion`.
+- Scroll-linked position (the coach in a road scene) follows the person's own scrolling and runs for everyone. Smooth scrolling and entrances do not run under `prefers-reduced-motion`.
 - Scroll effects use `ScrollTrigger`; do not add scroll listeners. Programmatic scrolling goes through `shared/motion/smoothScroll.ts`.
 - Animate `transform` and `opacity` only.
-- Motion budget: the bus, the sky, and one arrival on load. Do not add per-section reveal animations.
+- Motion budget: the coach in the two road scenes, and one arrival on load (the coach and the headline). Do not add per-section reveal animations.
 
 ## Dependencies
 
 - Prefer the platform: `Intl`, native date inputs, native form validation.
-- Approved runtime dependencies: `react`, `gsap` with `@gsap/react`, `lenis`, the two `@fontsource-variable` fonts. Anything else needs a reason the platform cannot meet.
+- Approved runtime dependencies: `react`, `gsap` with `@gsap/react`, `lenis`, and the three fonts (`@fontsource-variable/outfit`, `@fontsource-variable/cormorant-garamond`, `@fontsource/space-mono`). Anything else needs a reason the platform cannot meet.

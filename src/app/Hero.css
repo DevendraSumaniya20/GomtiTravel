@@ -1,34 +1,53 @@
 .hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.5rem;
-  max-width: 72rem;
+  position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  margin: 0 auto;
+  padding: 6.5rem var(--gutter) 0;
   color: var(--white);
-  padding: 6rem var(--gutter) calc(var(--road-h) + 3rem);
+}
+
+/* The name runs the full width, sized so the capitals reach both margins, with a rule beneath. */
+.hero__brand {
+  position: relative;
+  padding-bottom: 0.1em;
+  border-bottom: 1px solid var(--dark-line-strong);
+  font: 300 calc((100vw - 2 * var(--gutter)) * 0.1195) / 1 var(--body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hero__words {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  max-width: 34rem;
+  margin-top: clamp(1.5rem, 4vh, 3rem);
 }
 
 .hero__headline {
-  font: 750 clamp(2.6rem, 8.2vw, 6.75rem) / 0.96 var(--display);
-  font-stretch: 82%;
-  letter-spacing: -0.03em;
+  font: 300 clamp(1.5rem, 2.7vw, 2.4rem) / 1.25 var(--body);
 }
 
 /* each line is a mask its text rises out of */
 .hero__line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.08em;
 }
 
 .hero__line > span {
   display: block;
 }
 
+@media (min-width: 60rem) {
+  /* the links fit on one line here */
+  .hero {
+    padding-top: 4.5rem;
+  }
+}
+
 .hero__lede {
-  max-width: 38rem;
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font: 0.72rem/1.8 var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }

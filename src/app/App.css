@@ -1,41 +1,29 @@
-.app__header {
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.25rem var(--gutter);
+/* The trip search sits on the hero's lower edge, half over the road and half on the paper. */
+.app__search {
+  position: relative;
+  z-index: 1;
+  margin: -3.25rem var(--gutter) 0;
 }
 
-.app__brand {
-  font: 700 1.5rem/1 var(--display);
-  letter-spacing: -0.02em;
-  color: var(--white);
-  text-decoration: none;
-}
-
-/* the page ends at dawn, so the footer text is ink */
-.app__footer {
-  /* room below keeps the text in open sky, above the turbines */
-  padding: 2rem var(--gutter) calc(var(--road-h) + 32vh);
-  color: var(--ink);
-  text-align: center;
-}
-
-.app__footer a {
-  color: inherit;
+/* the dawn scene before the booking band: the coach arrives as the page reaches it */
+.app__arrival {
+  position: relative;
+  height: clamp(20rem, 78vh, 46rem);
 }
 
 .app__stack,
 .app__pair {
   display: grid;
   align-items: start;
-  gap: 1.25rem;
+  gap: 2rem clamp(2rem, 6vw, 6rem);
 }
 
 @media (min-width: 60rem) {
+  .app__search {
+    width: min(54rem, 62%);
+    margin-left: auto;
+  }
+
   .app__pair {
     grid-template-columns: 1fr 1.6fr;
   }

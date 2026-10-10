@@ -12,7 +12,7 @@ Source dependencies point inward only: `app -> features -> shared`.
 
 | Feature | Owns |
 |---|---|
-| `journey` | The scroll journey: coastal scenery, the road with its milestone stops, the bus, scroll-to-progress maths |
+| `journey` | The road scene (Dwarka coast, road, the coach driven by scroll) and the list of page sections |
 | `trips` | Routes, timetable, trip search, seat requests (make, look up, cancel, admin inbox) and fare quote |
 | `coaches` | Coach types and seat layouts |
 | `service` | What passengers get on board, boarding points, booking steps |
@@ -30,6 +30,6 @@ Source dependencies point inward only: `app -> features -> shared`.
 
 ## Adding a section to the page
 
-1. Add the stop to `features/journey/model/stops.ts`. The road and the bus pick it up.
+1. Add the stop to `features/journey/model/stops.ts`. The top navigation and the footer pick it up.
 2. Build the content in a feature's `ui/`.
 3. Compose it in `app/App.tsx` inside a `Section` whose `id` is the stop id.

@@ -1,7 +1,7 @@
 .admin {
   min-height: 100vh;
   padding: 1.5rem var(--gutter) 4rem;
-  background: var(--admin-bg);
+  background: var(--paper);
 }
 
 .admin__header,
@@ -17,20 +17,19 @@
 }
 
 .admin h1 {
-  font: 700 clamp(1.6rem, 4vw, 2.25rem) / 1.1 var(--display);
-  letter-spacing: -0.02em;
+  font: 300 clamp(2.2rem, 6vw, 4rem) / 1 var(--display);
+  text-transform: uppercase;
 }
 
 .admin h2 {
   margin-bottom: 1rem;
-  font: 650 1.5rem/1.2 var(--display);
+  font: 400 2rem/1.1 var(--display);
 }
 
 .admin__notice {
   max-width: 46rem;
   padding: 0.75rem 1rem;
-  border-left: 4px solid var(--marigold);
-  background: var(--field);
+  border-left: 2px solid var(--accent);
 }
 
 .admin__nav {
@@ -41,7 +40,9 @@
 
 .admin__nav a {
   color: var(--ink);
-  font-weight: 600;
+  font: 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* min-width lets a wide table scroll inside its pane instead of widening the page */

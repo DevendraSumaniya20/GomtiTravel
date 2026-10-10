@@ -1,0 +1,63 @@
+.site-footer {
+  background: var(--paper);
+}
+
+.site-footer__brand {
+  padding: clamp(4rem, 9vw, 8rem) var(--gutter) clamp(3rem, 7vw, 6rem);
+  font: 400 calc((100vw - 2 * var(--gutter)) * 0.1195) / 1 var(--body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.site-footer__columns {
+  display: grid;
+  gap: 2.5rem;
+  padding: 0 var(--gutter) clamp(3rem, 6vw, 5rem);
+}
+
+.site-footer h2 {
+  margin-bottom: 0.75rem;
+  font: 500 0.85rem var(--body);
+}
+
+.site-footer li a {
+  display: inline-block;
+  padding-block: 0.3rem;
+  color: var(--ink);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.site-footer li a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.site-footer__mono {
+  max-width: 22rem;
+  font: 0.85rem/1.7 var(--mono);
+  color: var(--ink-soft);
+}
+
+.site-footer__strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem var(--gutter);
+  background: var(--dark-paper);
+  color: var(--dark-ink-soft);
+  font: 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.site-footer__strip a {
+  color: inherit;
+}
+
+@media (min-width: 44rem) {
+  .site-footer__columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

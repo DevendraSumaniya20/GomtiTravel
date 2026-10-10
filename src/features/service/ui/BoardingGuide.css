@@ -1,7 +1,7 @@
 .boarding-guide {
   display: grid;
   align-items: start;
-  gap: 1.25rem;
+  gap: 1.25rem clamp(2rem, 6vw, 6rem);
 }
 
 .boarding-guide__points li {
@@ -21,20 +21,23 @@
   width: 0.8rem;
   height: 0.8rem;
   border-radius: 50%;
-  border: 3px solid var(--teal);
-  background: var(--white);
+  border: 1px solid var(--ink);
+  background: var(--paper);
 }
 
 .boarding-guide__points li:not(:last-child)::after {
   content: '';
   position: absolute;
-  left: calc(0.7rem - 1px);
+  left: 0.7rem;
   top: 2rem;
   bottom: -1.2rem;
-  border-left: 2px solid var(--teal);
+  border-left: 1px solid var(--line-strong);
 }
 
 .boarding-guide__points span {
+  font: 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--ink-soft);
   white-space: nowrap;
 }
@@ -59,9 +62,8 @@
   place-items: center;
   width: 2rem;
   height: 2rem;
-  border-radius: 50%;
-  background: var(--marigold);
-  font-weight: 700;
+  border: 1px solid var(--ink);
+  font: 0.8rem var(--mono);
 }
 
 @media (min-width: 44rem) {

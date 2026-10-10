@@ -4,14 +4,17 @@ import './Hero.css'
 
 type HeroProps = {
   id: string
+  /** The operator's name, set across the full width. */
+  brand: string
   /** One entry per line of the headline. */
   headline: readonly string[]
   lede: string
-  children: ReactNode
+  /** The picture behind the words; it fills the hero. */
+  scene: ReactNode
 }
 
-/** First screen: the headline rises line by line as the bus pulls in. */
-export function Hero({ id, headline, lede, children }: HeroProps) {
+/** First screen: the name across the top, the road scene behind, and the headline rising line by line. */
+export function Hero({ id, brand, headline, lede, scene }: HeroProps) {
   const hero = useRef<HTMLElement>(null)
 
   useGSAP(
@@ -25,15 +28,18 @@ export function Hero({ id, headline, lede, children }: HeroProps) {
 
   return (
     <section ref={hero} id={id} className="hero">
-      <h1 className="hero__headline">
-        {headline.map((line) => (
-          <span key={line} className="hero__line">
-            <span>{line}</span>
-          </span>
-        ))}
-      </h1>
-      <p className="hero__lede">{lede}</p>
-      {children}
+      {scene}
+      <p className="hero__brand">{brand}</p>
+      <div className="hero__words">
+        <h1 className="hero__headline">
+          {headline.map((line) => (
+            <span key={line} className="hero__line">
+              <span>{line}</span>
+            </span>
+          ))}
+        </h1>
+        <p className="hero__lede">{lede}</p>
+      </div>
     </section>
   )
 }

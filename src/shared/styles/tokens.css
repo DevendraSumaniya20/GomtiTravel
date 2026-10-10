@@ -1,80 +1,57 @@
-@import '@fontsource-variable/bricolage-grotesque/wdth.css';
-@import '@fontsource-variable/instrument-sans/index.css';
+@import '@fontsource-variable/outfit/index.css';
+@import '@fontsource-variable/cormorant-garamond/index.css';
+@import '@fontsource/space-mono/400.css';
 
 /* The only file that names colours and fonts. Breakpoints: 44rem, 60rem. */
 :root {
-  /* brand: night ink, milestone yellow, signboard green */
-  --ink: #14213a;
-  --ink-soft: #46546b;
-  --paper: #fffdf8;
-  --yellow: #f7c600;
-  --yellow-deep: #e0ae00;
-  --sign: #0b6a49;
-  --teal: #0e7c7b;
-  --marigold: #f6a21e;
+  /* page: warm paper and soft black */
+  --paper: #f7f3ec;
+  --ink: #2b2b2b;
+  --ink-soft: #6b6660;
+  --line: rgb(43 43 43 / 0.16);
+  --line-strong: rgb(43 43 43 / 0.45);
+  --accent: #b89b72;
   --white: #fff;
-  --line: rgb(20 33 58 / 0.14);
-  --line-strong: rgb(20 33 58 / 0.3);
-  --field: #fff;
-  --field-locked: rgb(20 33 58 / 0.06);
-  --admin-bg: #e3ecf2;
 
-  /* sky: the bus leaves at dusk, drives through the night and arrives at dawn */
-  --sky-dusk: linear-gradient(#131a47, #4a2f73 45%, #a34b6e 75%, #e98452);
-  --sky-night: linear-gradient(#050b22, #101c4c 60%, #22306b);
-  --sky-dawn: linear-gradient(#8fb6de, #f6c7b6 60%, #ffe6bd);
-  --sky-fallback: #131a47;
+  /* the same roles on a dark band or over the dusk scene */
+  --dark-paper: #2b2b2b;
+  --dark-ink: #f7f3ec;
+  --dark-ink-soft: #bdb7ae;
+  --dark-line: rgb(247 243 236 / 0.2);
+  --dark-line-strong: rgb(247 243 236 / 0.55);
+
+  /* the road scene: the bus leaves the Dwarka coast at dusk and arrives at dawn */
+  --sky-dusk: linear-gradient(#131a47, #4a2f73 40%, #a34b6e 62%, #e98452 80%);
+  --sky-dawn: linear-gradient(#8fb6de, #f6c7b6 55%, #ffe6bd 80%);
   --sun: radial-gradient(#fff6d6, #ffd36b 60%, #ffb347);
   --sun-glow: rgb(255 211 107 / 0.55);
   --moon: #f3f1e4;
   --moon-glow: rgb(243 241 228 / 0.35);
-
-  /* the Dwarka coast */
   --sea: linear-gradient(rgb(170 195 235 / 0.4), rgb(40 70 130 / 0.55));
-  --land: rgb(8 16 40 / 0.55);
   --silhouette: #0a1430;
   --ground: #0f2b2a;
   --asphalt: #262b33;
-  --stone: #f4f1e8;
 
   /* bus */
-  --bus-body: var(--teal);
-  --bus-roof: #0a5f5e;
-  --bus-skirt: #f4fbfb;
-  --bus-stripe: var(--marigold);
-  --bus-glass: rgb(16 35 58 / 0.88);
-  --bus-hub: #dfe7ee;
-  --bus-spoke: #5d7186;
+  --bus-body-top: #fff;
+  --bus-body-bottom: #d9dfe5;
+  --bus-livery: #0e7c7b;
+  --bus-stripe: #f6a21e;
+  --bus-glass-top: #0e1722;
+  --bus-glass-bottom: #3b5269;
+  --bus-shine: rgb(255 255 255 / 0.16);
+  --bus-dark: #171c23;
+  --bus-rim-light: #f3f5f7;
+  --bus-rim-dark: #8a949e;
   --bus-brake: #d6453d;
   --bus-beam: #ffe9a8;
-  --bus-shadow: rgb(0 0 0 / 0.35);
+  --bus-shadow: rgb(0 0 0 / 0.38);
 
   /* type */
-  --display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
-  --body: 'Instrument Sans Variable', system-ui, sans-serif;
+  --display: 'Cormorant Garamond Variable', Georgia, serif;
+  --body: 'Outfit Variable', system-ui, sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
 
-  /* layout: the road strip along the bottom of the screen */
-  --road-h: 5.25rem;
-  --lane-y: 0.7rem;
-  --lane-h: 1.9rem;
-  --bus-w: 10rem;
-  --gutter: clamp(1rem, 4vw, 3rem);
-}
-
-@media (min-width: 44rem) {
-  :root {
-    --road-h: 6.5rem;
-    --lane-y: 1rem;
-    --lane-h: 2.3rem;
-    --bus-w: 13rem;
-  }
-}
-
-@media (min-width: 60rem) {
-  :root {
-    --road-h: 8.75rem;
-    --lane-y: 1.3rem;
-    --lane-h: 3rem;
-    --bus-w: 20rem;
-  }
+  /* layout */
+  --gutter: clamp(1.25rem, 3.3vw, 3rem);
 }

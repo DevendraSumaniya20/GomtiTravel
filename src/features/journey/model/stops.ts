@@ -1,5 +1,5 @@
 export type Stop = {
-  /** Also the id of the page section the bus stops at. */
+  /** Also the id of the page section. */
   id: string
   label: string
 }

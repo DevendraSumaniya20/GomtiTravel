@@ -1,15 +1,17 @@
 .roadside {
   position: absolute;
   left: 0;
-  bottom: var(--road-h);
-  height: clamp(6rem, 22vh, 11rem);
+  bottom: var(--scene-road);
+  /* kept in scale with the coach */
+  height: calc(var(--scene-bus) * 0.16);
   /* the drawing is 12 times as wide as it is tall */
   aspect-ratio: 12;
   fill: var(--silhouette);
+  will-change: transform;
 }
 
 .roadside__flag {
-  fill: var(--marigold);
+  fill: var(--bus-stripe);
 }
 
 .roadside__blades {

@@ -8,7 +8,7 @@
   display: grid;
   justify-items: start;
   gap: 0.5rem;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .booking-lookup__result:empty {

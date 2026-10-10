@@ -1,10 +1,9 @@
-import { useState, type MouseEvent } from 'react'
+import { useState } from 'react'
 import { CoachList } from '../features/coaches/ui/CoachList.tsx'
 import { CharterForm } from '../features/contact/ui/CharterForm.tsx'
 import { ContactCard } from '../features/contact/ui/ContactCard.tsx'
 import { STOPS, type StopId } from '../features/journey/model/stops.ts'
-import { Road } from '../features/journey/ui/Road.tsx'
-import { Scenery } from '../features/journey/ui/Scenery.tsx'
+import { RoadScene } from '../features/journey/ui/RoadScene.tsx'
 import { AmenityList } from '../features/service/ui/AmenityList.tsx'
 import { BoardingGuide } from '../features/service/ui/BoardingGuide.tsx'
 import { useRoutes } from '../features/trips/api/tripsGateway.ts'
@@ -18,17 +17,14 @@ import { TripSearch } from '../features/trips/ui/TripSearch.tsx'
 import { scrollToElement, useSmoothScroll } from '../shared/motion/smoothScroll.ts'
 import { Section } from '../shared/ui/Section.tsx'
 import { Hero } from './Hero.tsx'
+import { SiteFooter } from './SiteFooter.tsx'
+import { SiteNav } from './SiteNav.tsx'
 import './App.css'
 
-const HEADLINE = [`Leave ${ORIGIN} at night.`, 'Wake up where', 'you are going.']
-
-/** Links keep their `href` so they work without JavaScript; with it they scroll smoothly. */
-function goTo(stop: StopId) {
-  return (event: MouseEvent) => {
-    event.preventDefault()
-    scrollToElement(stop)
-  }
-}
+const BRAND = 'Gomti Travels'
+const HEADLINE = [`Leave ${ORIGIN} at night.`, 'Wake up where you are going.']
+/** Every section but the first; the hero needs no link to itself. */
+const LINKS = STOPS.slice(1)
 
 export function App() {
   useSmoothScroll()
@@ -40,7 +36,7 @@ export function App() {
   const [today] = useState(() => isoDate(new Date()))
 
   const destinations = routes.map((route) => route.to).join(', ')
-  const lede = destinations ? `Daily sleeper and seater coaches from ${ORIGIN} to ${destinations}.` : `Coaches from ${ORIGIN}.`
+  const lede = destinations ? `Daily from ${ORIGIN} to ${destinations}` : `Coaches from ${ORIGIN}, Gujarat`
 
   const requestSeat = (id: string) => {
     setRouteId(id)
@@ -49,19 +45,12 @@ export function App() {
 
   return (
     <div>
-      <Scenery />
-
-      <header className="app__header">
-        <a className="app__brand" href="#start" onClick={goTo('start')}>
-          Gomti Travels
-        </a>
-        <a className="btn" href="#book" onClick={goTo('book')}>
-          Request a seat
-        </a>
-      </header>
+      <SiteNav links={LINKS} />
 
       <main>
-        <Hero id="start" headline={HEADLINE} lede={lede}>
+        <Hero id="start" brand={BRAND} headline={HEADLINE} lede={lede} scene={<RoadScene time="dusk" arrive />} />
+
+        <div className="app__search">
           <TripSearch
             destinationId={destinationId}
             date={date}
@@ -70,33 +59,49 @@ export function App() {
             onDateChange={setDate}
             onSearch={() => scrollToElement('routes' satisfies StopId)}
           />
-        </Hero>
+        </div>
 
-        <Section id="routes" title={`Departures from ${ORIGIN}`}>
+        <Section
+          id="routes"
+          title="Departures"
+          lede="Day coaches along the Saurashtra coast and overnight sleepers inland. Pick a route to request a seat."
+        >
           <QuickRoutes onPick={requestSeat} />
           <Timetable destinationId={destinationId} onShowAll={() => setDestinationId('')} onRequestSeat={requestSeat} />
         </Section>
 
-        <Section id="fleet" title="Our coaches">
+        <Section id="fleet" title="The coaches" lede="Flat berths for the long night runs, pushback seats for the day.">
           <CoachList />
         </Section>
 
-        <Section id="onboard" title="What you get on the bus">
+        <Section id="onboard" title="On board" lede="What every passenger gets, on every departure.">
           <AmenityList />
         </Section>
 
-        <Section id="boarding" title={`Where to board in ${ORIGIN}`}>
+        <Section
+          id="boarding"
+          title="Boarding"
+          lede={`The coach collects passengers across ${ORIGIN} before it takes the highway. Be at your point fifteen minutes early.`}
+        >
           <BoardingGuide />
         </Section>
 
-        <Section id="book" title="Request a seat">
+        <div className="app__arrival">
+          <RoadScene time="dawn" />
+        </div>
+
+        <Section id="book" title="Request a seat" lede="Send the request and we call you back to confirm the seats and the fare." tone="dark">
           <div className="app__stack">
             <BookingForm routeId={routeId} date={date} today={today} onRouteChange={setRouteId} />
             <BookingLookup />
           </div>
         </Section>
 
-        <Section id="contact" title="Contact and charter">
+        <Section
+          id="contact"
+          title="Contact"
+          lede="Hire a whole coach for a wedding party, a school trip or a yatra, or reach the office directly."
+        >
           <div className="app__pair">
             <ContactCard />
             <CharterForm today={today} />
@@ -104,15 +109,7 @@ export function App() {
         </Section>
       </main>
 
-      <footer className="app__footer">
-        <p>Gomti Travels, {ORIGIN}.</p>
-        <p>Timings, fares and coach details on this page are sample data.</p>
-        <p>
-          <a href="/admin.html">Admin</a>
-        </p>
-      </footer>
-
-      <Road stops={STOPS} />
+      <SiteFooter brand={BRAND} place={`${ORIGIN}, Gujarat`} year={today.slice(0, 4)} links={LINKS} />
     </div>
   )
 }

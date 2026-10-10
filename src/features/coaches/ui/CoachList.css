@@ -11,6 +11,10 @@
 }
 
 .coach-list__capacity {
+  margin-top: 0.5rem;
+  font: 0.72rem var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--ink-soft);
 }
 
@@ -22,7 +26,7 @@
 
 .coach-list__notes li {
   padding-left: 1.3rem;
-  background: radial-gradient(circle at 0.35rem 0.75em, var(--marigold) 0.3rem, transparent 0.32rem);
+  background: radial-gradient(circle at 0.35rem 0.75em, var(--accent) 0.22rem, transparent 0.24rem);
 }
 
 @media (min-width: 60rem) {
