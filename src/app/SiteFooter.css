@@ -23,7 +23,7 @@
 
 .site-footer li a {
   display: inline-block;
-  padding-block: 0.3rem;
+  padding-block: 0.6rem;
   color: var(--ink);
   font-weight: 400;
   text-decoration: none;
@@ -42,9 +42,11 @@
 
 .site-footer__strip {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 1rem;
-  padding: 0.6rem var(--gutter);
+  align-items: center;
+  gap: 0 1rem;
+  padding: 0 var(--gutter);
   background: var(--dark-paper);
   color: var(--dark-ink-soft);
   font: 0.72rem var(--mono);
@@ -53,6 +55,9 @@
 }
 
 .site-footer__strip a {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
   color: inherit;
 }
 

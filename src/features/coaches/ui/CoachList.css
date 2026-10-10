@@ -1,6 +1,8 @@
 .coach-list {
   display: grid;
-  gap: 1.25rem;
+  /* as many columns as fit, without a breakpoint */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 1.25rem clamp(1.5rem, 4vw, 4rem);
 }
 
 .coach-list__coach {
@@ -27,10 +29,4 @@
 .coach-list__notes li {
   padding-left: 1.3rem;
   background: radial-gradient(circle at 0.35rem 0.75em, var(--accent) 0.22rem, transparent 0.24rem);
-}
-
-@media (min-width: 60rem) {
-  .coach-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }

@@ -1,8 +1,4 @@
 .road-scene {
-  /* the road's share of the scene's height */
-  --scene-road: 17%;
-  /* the drawing's width; the coach body is 79% of it, the rest is headlight beam */
-  --scene-bus: min(118vw, 78rem);
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -44,7 +40,8 @@
 }
 
 .road-scene--dusk .road-scene__orb {
-  top: 41%;
+  /* just above the coach, in the room the hero keeps clear of words */
+  bottom: calc(var(--scene-road) * 0.5 + var(--scene-bus-h) + 1.75rem);
   width: clamp(2.75rem, 5vw, 4.25rem);
   background: var(--moon);
   box-shadow: 0 0 50px 10px var(--moon-glow);
@@ -78,7 +75,7 @@
 .road-scene__bus {
   position: absolute;
   left: 0;
-  bottom: 8.5%;
+  bottom: calc(var(--scene-road) * 0.5);
   width: var(--scene-bus);
   will-change: transform;
 }

@@ -9,6 +9,8 @@
 .app__arrival {
   position: relative;
   height: clamp(20rem, 78vh, 46rem);
+  /* never shorter than the coach standing on its road */
+  min-height: calc(var(--scene-road) + var(--scene-bus-h) + 3rem);
 }
 
 .app__stack,

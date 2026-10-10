@@ -114,6 +114,8 @@ input,
 select,
 textarea {
   width: 100%;
+  /* lets a date field shrink inside a grid column on iOS */
+  min-width: 0;
   min-height: 2.75rem;
   padding: 0;
   border: 0;

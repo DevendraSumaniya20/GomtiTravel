@@ -24,6 +24,21 @@ paths:
 - A dark band is `Section tone="dark"`. It remaps `--paper`, `--ink` and `--line`, so components need no dark variant; never hard-code a light or dark colour in a component.
 - No UI kit and no CSS framework without discussion.
 
+## Responsive
+
+The page must work from a 320px phone to a 1920px desktop, in portrait and landscape.
+
+- Mobile-first. Base styles are the phone layout; columns are added at 44rem and 60rem only.
+- Reach for an intrinsic layout before a breakpoint: `repeat(auto-fit, minmax(min(100%, 18rem), 1fr))`, `flex-wrap`, `clamp()`.
+- No horizontal page scroll at any width. A wide table scrolls inside its own wrapper (`overflow-x: auto`); a grid inside a grid sets `min-width: 0` on its parent.
+- Grid and flex children that hold text or form fields get `min-width: 0`, so a long place name or a date field wraps or shrinks instead of widening the row.
+- Sizes are fluid: `clamp()` for type and spacing, `var(--gutter)` for side margins, `rem` elsewhere. No fixed pixel widths for layout.
+- Never size a block from the viewport height alone. Anything using `vh` or `svh` also needs room for its content, because a landscape phone is under 400px tall. The hero reserves the coach's height in its padding for this reason.
+- The road scene scales from one token, `--scene-bus` (the coach's width). Size anything in the scene from it or from `--scene-road`, not from the viewport.
+- Touch: navigation links and buttons are at least 2.75rem tall; no interactive element is under 24px. Form text is at least 16px so iOS does not zoom on focus.
+- Nothing is available on hover only.
+- A change to layout is checked at 320, 390, 768, 1024, 1440 and 1920 wide, and on a landscape phone (844 by 390), before it is done.
+
 ## Accessibility
 
 - Semantic elements first: `button` for actions, `a` for navigation, one `h1`, headings in order.

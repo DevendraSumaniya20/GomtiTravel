@@ -6,6 +6,8 @@ import './RoadScene.css'
 
 /** Wheel radius as a share of the Bus drawing's width (31 of 1000), to turn the wheels by road covered. */
 const WHEEL_RATIO = 31 / 1000
+/** Where the middle of the coach body sits in the Bus drawing, as a share of its width. */
+const BODY_CENTRE = 0.408
 /** How far the roadside slides while the scene crosses the screen, as a share of the scene's width. */
 const PARALLAX = 0.18
 
@@ -46,13 +48,14 @@ export function RoadScene({ time, arrive = false }: RoadSceneProps) {
         setX(x)
         setSpin((x / wheelTurn) * 360)
         setBounce(Math.sin(x / 34) * 1.6)
-        setRoadside(-to * PARALLAX * self.progress)
+        setRoadside(-root.clientWidth * PARALLAX * self.progress)
       }
 
-      // The coach starts just off the left edge and ends just off the right one.
+      // The coach starts just off the left edge, and halfway through its body is centred in the scene.
       const measure = (self: ScrollTrigger) => {
+        const centred = root.clientWidth / 2 - bus.offsetWidth * BODY_CENTRE
         from = -bus.offsetWidth
-        to = root.clientWidth
+        to = 2 * centred - from
         wheelTurn = 2 * Math.PI * bus.offsetWidth * WHEEL_RATIO
         place(self)
       }

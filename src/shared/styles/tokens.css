@@ -54,4 +54,8 @@
 
   /* layout */
   --gutter: clamp(1.25rem, 3.3vw, 3rem);
+  /* The road scene scales from the coach drawing's width. It is capped by height too, so a landscape phone still fits it. */
+  --scene-bus: min(118vw, 78rem, 220vh);
+  --scene-bus-h: calc(var(--scene-bus) * 0.25);
+  --scene-road: clamp(5rem, 17vh, 10rem);
 }

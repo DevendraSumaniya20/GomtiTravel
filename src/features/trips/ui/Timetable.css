@@ -15,9 +15,21 @@
   border-top: 0;
 }
 
-.timetable__row .btn {
+/* long place names wrap instead of pushing the row wider than the screen */
+.timetable__row > * {
+  min-width: 0;
+}
+
+/* on a phone the fare sits beside the place and the button takes its own line */
+.timetable__fare {
   grid-column: 2;
   grid-row: 1;
+}
+
+.timetable__row .btn,
+.timetable__coach {
+  grid-column: 1 / -1;
+  justify-self: start;
 }
 
 .timetable__place {
@@ -40,6 +52,7 @@
 .timetable__time {
   grid-column: 1 / -1;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
   font: 0.95rem var(--mono);
@@ -56,6 +69,18 @@
   font: 1.05rem var(--mono);
 }
 
+@media (min-width: 44rem) {
+  .timetable__row .btn {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .timetable__fare {
+    grid-column: auto;
+    grid-row: auto;
+  }
+}
+
 @media (min-width: 60rem) {
   .timetable__row {
     grid-template-columns: 1.3fr 1.6fr 0.8fr auto auto;
@@ -63,6 +88,7 @@
   }
 
   .timetable__row .btn,
+  .timetable__coach,
   .timetable__time {
     grid-column: auto;
     grid-row: auto;

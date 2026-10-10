@@ -2,7 +2,8 @@
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  padding: 6.5rem var(--gutter) 0;
+  /* The space at the foot is the coach's and the moon's: on a short screen the hero grows instead of the coach covering the words. */
+  padding: 6.5rem var(--gutter) calc(var(--scene-road) * 0.5 + var(--scene-bus-h) + 6rem);
   color: var(--white);
 }
 
@@ -42,7 +43,7 @@
 @media (min-width: 60rem) {
   /* the links fit on one line here */
   .hero {
-    padding-top: 4.5rem;
+    padding-top: 5rem;
   }
 }
 
