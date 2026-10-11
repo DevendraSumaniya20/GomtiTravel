@@ -1,24 +1,27 @@
+/* a dark band, with the ink roles remapped as in a dark section */
 .site-footer {
-  background: var(--paper);
+  --ink: var(--dark-ink);
+  --ink-soft: var(--dark-ink-soft);
+  padding-inline: max(var(--gutter), (100% - var(--content)) / 2);
+  background: var(--dark-paper);
+  color: var(--ink);
 }
 
 .site-footer__brand {
-  padding: clamp(4rem, 9vw, 8rem) var(--gutter) clamp(3rem, 7vw, 6rem);
-  font: 400 calc((100vw - 2 * var(--gutter)) * 0.1195) / 1 var(--body);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  padding-block: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+  font: 700 1.6rem var(--body);
 }
 
 .site-footer__columns {
   display: grid;
-  gap: 2.5rem;
-  padding: 0 var(--gutter) clamp(3rem, 6vw, 5rem);
+  gap: 2rem;
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
 }
 
 .site-footer h2 {
   margin-bottom: 0.75rem;
-  font: 500 0.85rem var(--body);
+  font: 600 0.85rem var(--body);
+  color: var(--ink-soft);
 }
 
 .site-footer li a {
@@ -36,7 +39,7 @@
 
 .site-footer__mono {
   max-width: 22rem;
-  font: 0.85rem/1.7 var(--mono);
+  font: 400 0.95rem/1.7 var(--body);
   color: var(--ink-soft);
 }
 
@@ -46,10 +49,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 0 1rem;
-  padding: 0 var(--gutter);
-  background: var(--dark-paper);
+  border-top: 1px solid var(--dark-line);
   color: var(--dark-ink-soft);
-  font: 0.72rem var(--mono);
+  font: 500 0.72rem var(--body);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -63,6 +65,6 @@
 
 @media (min-width: 44rem) {
   .site-footer__columns {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -53,7 +53,7 @@ export function Bus() {
           d={`${SHINES.map((x) => `M${x} 54l-14 36h16l14-36ZM${x + 40} 98l-14 36h10l14-36Z`).join('')}M704 58l-26 86h18l30-80Z`}
         />
         <text className="bus__name" x="360" y="159" textAnchor="middle">
-          GOMTI TRAVELS
+          GOMTIJI TRAVELS
         </text>
         <path className="bus__bays" d="M300 188h112v15H300ZM424 188h112v15H424Z" />
         <path className="bus__dark" d="M46 203h730v6H46ZM742 198h40a6 6 0 0 1 6 6v2a6 6 0 0 1-6 6h-40ZM26 204a6 6 0 0 1 6-6h24v14H32a6 6 0 0 1-6-6Z" />

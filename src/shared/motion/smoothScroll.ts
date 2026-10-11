@@ -21,10 +21,13 @@ export function useSmoothScroll(): void {
   })
 }
 
-/** Scrolls to the element with this id, smoothly when Lenis is running. */
+/** Scrolls to the element with this id, smoothly when Lenis is running, and moves keyboard focus there. */
 export function scrollToElement(id: string): void {
   const element = document.getElementById(id)
   if (!element) return
+  // A section is not focusable by itself; without this the next Tab starts from the link that was clicked.
+  if (!element.hasAttribute('tabindex')) element.tabIndex = -1
+  element.focus({ preventScroll: true })
   if (lenis) lenis.scrollTo(element)
   else element.scrollIntoView()
 }

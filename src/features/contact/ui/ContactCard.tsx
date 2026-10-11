@@ -1,25 +1,26 @@
+import { spacedPhone } from '../model/contact.ts'
 import { useContact } from '../api/contactGateway.ts'
 import './ContactCard.css'
 
-/** The operator's phone, email and office address, once they have been entered in the admin. */
+/** Who to call and where the desk is. Each number is a button that dials it. */
 export function ContactCard() {
-  const { phone, email, address } = useContact()
+  const { owner, phones, email, address } = useContact()
 
   return (
     <div className="contact-card sheet pane">
-      <h3>Reach the office</h3>
-      {phone || email || address ? (
+      <h3>Call the desk</h3>
+      {owner && <p className="contact-card__owner">{owner}</p>}
+      <ul className="contact-card__phones">
+        {phones.map((phone) => (
+          <li key={phone}>
+            <a className="btn" href={`tel:+91${phone}`}>
+              {spacedPhone(phone)}
+            </a>
+          </li>
+        ))}
+      </ul>
+      {(email || address) && (
         <dl>
-          {phone && (
-            <div>
-              <dt>Phone</dt>
-              <dd>
-                <a className="link" href={`tel:${phone.replaceAll(' ', '')}`}>
-                  {phone}
-                </a>
-              </dd>
-            </div>
-          )}
           {email && (
             <div>
               <dt>Email</dt>
@@ -37,8 +38,6 @@ export function ContactCard() {
             </div>
           )}
         </dl>
-      ) : (
-        <p>The phone number, email and office address will appear here once the operator adds them.</p>
       )}
     </div>
   )

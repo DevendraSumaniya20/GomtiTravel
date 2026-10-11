@@ -1,8 +1,0 @@
-.booking-inbox {
-  overflow-x: auto;
-}
-
-.booking-inbox__actions {
-  display: flex;
-  gap: 1rem;
-}

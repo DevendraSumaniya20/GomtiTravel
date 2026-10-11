@@ -13,7 +13,7 @@ type HeroProps = {
   scene: ReactNode
 }
 
-/** First screen: the name across the top, the road scene behind, and the headline rising line by line. */
+/** First screen: the name across the top, the road scene behind, and the headline rising line by line. The words drift up and fade as it scrolls out. */
 export function Hero({ id, brand, headline, lede, scene }: HeroProps) {
   const hero = useRef<HTMLElement>(null)
 
@@ -21,6 +21,10 @@ export function Hero({ id, brand, headline, lede, scene }: HeroProps) {
     () => {
       withMotion(() => {
         gsap.from('.hero__line > span', { yPercent: 110, duration: 1, stagger: 0.09, ease: 'power4.out' })
+        // The words leave ahead of the scene as the hero scrolls out, the name slower than the headline.
+        const scrollTrigger = { trigger: hero.current, start: 'top top', end: 'bottom top', scrub: true }
+        gsap.to('.hero__brand', { yPercent: -35, opacity: 0, ease: 'power1.in', scrollTrigger })
+        gsap.to('.hero__words', { yPercent: -70, opacity: 0, ease: 'power1.in', scrollTrigger })
       })
     },
     { scope: hero },

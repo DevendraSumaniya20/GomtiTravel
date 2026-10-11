@@ -1,19 +1,10 @@
 import { useState } from 'react'
-import { CoachList } from '../features/coaches/ui/CoachList.tsx'
-import { CharterForm } from '../features/contact/ui/CharterForm.tsx'
 import { ContactCard } from '../features/contact/ui/ContactCard.tsx'
+import { EnquiryForm } from '../features/contact/ui/EnquiryForm.tsx'
 import { STOPS, type StopId } from '../features/journey/model/stops.ts'
 import { RoadScene } from '../features/journey/ui/RoadScene.tsx'
-import { AmenityList } from '../features/service/ui/AmenityList.tsx'
-import { BoardingGuide } from '../features/service/ui/BoardingGuide.tsx'
-import { useRoutes } from '../features/trips/api/tripsGateway.ts'
-import { isoDate } from '../features/trips/model/booking.ts'
-import { ORIGIN } from '../features/trips/model/routes.ts'
-import { BookingForm } from '../features/trips/ui/BookingForm.tsx'
-import { BookingLookup } from '../features/trips/ui/BookingLookup.tsx'
-import { QuickRoutes } from '../features/trips/ui/QuickRoutes.tsx'
-import { Timetable } from '../features/trips/ui/Timetable.tsx'
-import { TripSearch } from '../features/trips/ui/TripSearch.tsx'
+import { ORIGIN, SERVICES } from '../features/services/model/services.ts'
+import { ServiceList } from '../features/services/ui/ServiceList.tsx'
 import { scrollToElement, useSmoothScroll } from '../shared/motion/smoothScroll.ts'
 import { Section } from '../shared/ui/Section.tsx'
 import { Hero } from './Hero.tsx'
@@ -21,90 +12,43 @@ import { SiteFooter } from './SiteFooter.tsx'
 import { SiteNav } from './SiteNav.tsx'
 import './App.css'
 
-const BRAND = 'Gomti Travels'
-const HEADLINE = [`Leave ${ORIGIN} at night.`, 'Wake up where you are going.']
+const BRAND = 'Gomtiji Tours & Travels'
+const HEADLINE = ['Buses, darshan, taxis and tickets.', `One desk in ${ORIGIN}.`]
+const LEDE = 'Daily sleeper buses, Dwarka and Somnath darshan, car and bike on rent, train and flight booking.'
 /** Every section but the first; the hero needs no link to itself. */
 const LINKS = STOPS.slice(1)
 
 export function App() {
   useSmoothScroll()
-  const routes = useRoutes()
-  // Shared by the trip search, the timetable and the booking form.
-  const [destinationId, setDestinationId] = useState('')
-  const [date, setDate] = useState('')
-  const [routeId, setRouteId] = useState('')
-  const [today] = useState(() => isoDate(new Date()))
+  // Shared by the service cards, which choose it, and the enquiry form, which shows it.
+  const [serviceId, setServiceId] = useState('')
+  // local date as YYYY-MM-DD, which is how the Canadian locale writes it
+  const [today] = useState(() => new Date().toLocaleDateString('en-CA'))
 
-  const destinations = routes.map((route) => route.to).join(', ')
-  const lede = destinations ? `Daily from ${ORIGIN} to ${destinations}` : `Coaches from ${ORIGIN}, Gujarat`
-
-  const requestSeat = (id: string) => {
-    setRouteId(id)
-    scrollToElement('book' satisfies StopId)
+  const enquire = (id: string) => {
+    setServiceId(id)
+    scrollToElement('contact' satisfies StopId)
   }
 
   return (
     <div>
-      <SiteNav links={LINKS} />
+      <SiteNav brand={BRAND} homeId={STOPS[0].id} links={LINKS} actionId={'contact' satisfies StopId} />
 
       <main>
-        <Hero id="start" brand={BRAND} headline={HEADLINE} lede={lede} scene={<RoadScene time="dusk" arrive />} />
+        <Hero id="start" brand={BRAND} headline={HEADLINE} lede={LEDE} scene={<RoadScene time="dusk" arrive />} />
 
-        <div className="app__search">
-          <TripSearch
-            destinationId={destinationId}
-            date={date}
-            today={today}
-            onDestinationChange={setDestinationId}
-            onDateChange={setDate}
-            onSearch={() => scrollToElement('routes' satisfies StopId)}
-          />
-        </div>
-
-        <Section
-          id="routes"
-          title="Departures"
-          lede="Day coaches along the Saurashtra coast and overnight sleepers inland. Pick a route to request a seat."
-        >
-          <QuickRoutes onPick={requestSeat} />
-          <Timetable destinationId={destinationId} onShowAll={() => setDestinationId('')} onRequestSeat={requestSeat} />
-        </Section>
-
-        <Section id="fleet" title="The coaches" lede="Flat berths for the long night runs, pushback seats for the day.">
-          <CoachList />
-        </Section>
-
-        <Section id="onboard" title="On board" lede="What every passenger gets, on every departure.">
-          <AmenityList />
-        </Section>
-
-        <Section
-          id="boarding"
-          title="Boarding"
-          lede={`The coach collects passengers across ${ORIGIN} before it takes the highway. Be at your point fifteen minutes early.`}
-        >
-          <BoardingGuide />
+        <Section id="services" title="What we do" lede={`Everything a traveller needs in ${ORIGIN}. Pick a service to ask about it.`}>
+          <ServiceList services={SERVICES} onEnquire={enquire} />
         </Section>
 
         <div className="app__arrival">
           <RoadScene time="dawn" />
         </div>
 
-        <Section id="book" title="Request a seat" lede="Send the request and we call you back to confirm the seats and the fare." tone="dark">
-          <div className="app__stack">
-            <BookingForm routeId={routeId} date={date} today={today} onRouteChange={setRouteId} />
-            <BookingLookup />
-          </div>
-        </Section>
-
-        <Section
-          id="contact"
-          title="Contact"
-          lede="Hire a whole coach for a wedding party, a school trip or a yatra, or reach the office directly."
-        >
+        <Section id="contact" title="Contact" lede="Call the desk to book, or leave your number and what you need." tone="dark">
           <div className="app__pair">
             <ContactCard />
-            <CharterForm today={today} />
+            <EnquiryForm services={SERVICES} serviceId={serviceId} onServiceChange={setServiceId} today={today} />
           </div>
         </Section>
       </main>

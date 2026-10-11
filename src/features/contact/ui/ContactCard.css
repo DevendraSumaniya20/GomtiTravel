@@ -1,13 +1,33 @@
 .contact-card,
-.contact-card dl {
+.contact-card dl,
+.contact-card__phones {
   display: grid;
   align-content: start;
+  justify-items: start;
   gap: 1rem;
+}
+
+.contact-card h3 {
+  margin: 0;
+}
+
+.contact-card__owner {
+  font-weight: 600;
+}
+
+/* a dialled number has no arrow */
+.contact-card__phones .btn::after {
+  content: none;
+}
+
+.contact-card__phones .btn {
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
 }
 
 .contact-card dt {
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--ink-soft);
 }
 

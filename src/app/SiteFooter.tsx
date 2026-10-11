@@ -7,7 +7,7 @@ type SiteFooterProps = {
   links: readonly { id: string; label: string }[]
 }
 
-/** The name once more at full width, the section list, and the note that the figures are samples. */
+/** The name once more, the section list, and the way in to the admin. */
 export function SiteFooter({ brand, place, year, links }: SiteFooterProps) {
   return (
     <footer className="site-footer">
@@ -26,10 +26,6 @@ export function SiteFooter({ brand, place, year, links }: SiteFooterProps) {
         <div>
           <h2>{brand}</h2>
           <p className="site-footer__mono">{place}</p>
-        </div>
-        <div>
-          <h2>Please note</h2>
-          <p className="site-footer__mono">Timings, fares and coach details on this page are sample data.</p>
         </div>
       </div>
       <div className="site-footer__strip">

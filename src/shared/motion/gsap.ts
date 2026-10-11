@@ -4,6 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
+// Web fonts change the height of every section, so the triggers are measured again once they are in.
+void document.fonts?.ready.then(() => ScrollTrigger.refresh())
+
 /** Entrances and smooth scrolling are only for people who have not asked for reduced motion. */
 const MOTION_OK = '(prefers-reduced-motion: no-preference)'
 

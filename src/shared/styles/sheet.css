@@ -1,8 +1,11 @@
-/* A block of content set off by a rule above it. There are no cards: content sits on the page. */
+/* A card: the block every list, form and panel sits in. */
 .sheet {
-  border-top: 1px solid var(--line-strong);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
 
 .pane {
-  padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
 }

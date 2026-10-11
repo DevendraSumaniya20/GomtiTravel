@@ -1,46 +1,99 @@
+/* A white bar: the name, the section links, and the booking link as a button. */
 .site-nav {
-  position: absolute;
-  inset: 0 0 auto;
+  position: relative;
   z-index: 10;
-  /* three to a row on a phone, so the links always take two rows and the hero can leave exactly that much room */
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  justify-content: start;
-  gap: 0 1.25rem;
-  padding: 0.5rem var(--gutter);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 1.5rem;
+  padding: 0.5rem max(var(--gutter), (100% - var(--content)) / 2);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
 }
 
-.site-nav a {
+.site-nav__brand {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
   min-height: 2.75rem;
-  color: var(--white);
-  font: 400 clamp(0.9rem, 4vw, 1.05rem) var(--body);
+  /* on a phone the button sits at the right of this row, so a long name wraps short of it */
+  padding-right: 8.5rem;
+  color: var(--accent-text);
+  font: 700 1.35rem/1.15 var(--body);
   text-decoration: none;
 }
 
-.site-nav a::before {
-  content: '+';
-  font-weight: 300;
+.site-nav nav {
+  /* its own row under the name, clear of the button */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 1.25rem;
 }
 
-.site-nav a:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
+.site-nav nav a:not(.btn) {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-nav nav a:not(.btn):hover,
+.site-nav nav a[aria-current]:not(.btn) {
+  color: var(--accent-text);
+}
+
+/* on a phone the button sits beside the name, above the links */
+.site-nav .btn {
+  position: absolute;
+  top: 0.5rem;
+  right: var(--gutter);
+  min-height: 2.75rem;
+}
+
+.site-nav__progress {
+  display: none;
 }
 
 @media (min-width: 60rem) {
-  /* Stays in view on wide screens. White with a difference blend reads on the scene, the paper and the dark band alike. */
+  /* stays in view on wide screens, where it is one row */
   .site-nav {
-    position: fixed;
-    display: flex;
-    gap: 3rem;
-    mix-blend-mode: difference;
+    position: sticky;
+    top: 0;
+    flex-wrap: nowrap;
   }
 
-  /* the last two links sit at the right, apart from the rest */
-  .site-nav a:nth-last-child(2) {
+  .site-nav__brand {
+    padding-right: 0;
+    white-space: nowrap;
+  }
+
+  .site-nav nav {
+    width: auto;
+    flex: 1;
+    flex-wrap: nowrap;
+    gap: 0 1.75rem;
+    margin-left: 1.5rem;
+  }
+
+  /* the button sits at the far right, apart from the links */
+  .site-nav nav .btn {
+    position: static;
+    order: 1;
     margin-left: auto;
+  }
+
+  /* a hairline along the bar's lower edge that fills as the page is read */
+  .site-nav__progress {
+    position: absolute;
+    inset: auto 0 -1px;
+    display: block;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
   }
 }

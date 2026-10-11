@@ -1,10 +1,10 @@
 import { enquiriesStore, useEnquiries } from '../api/contactGateway.ts'
 import './EnquiryInbox.css'
 
-/** Admin view of charter enquiries, newest first. */
+/** Admin view of the enquiries left on the public page, newest first. */
 export function EnquiryInbox() {
   const enquiries = useEnquiries()
-  if (enquiries.length === 0) return <p>No charter enquiries yet.</p>
+  if (enquiries.length === 0) return <p>No enquiries yet.</p>
 
   return (
     <div className="enquiry-inbox">
@@ -13,9 +13,9 @@ export function EnquiryInbox() {
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Mobile</th>
-            <th scope="col">Where to</th>
+            <th scope="col">Service</th>
             <th scope="col">Date</th>
-            <th scope="col">Passengers</th>
+            <th scope="col">Details</th>
             <th scope="col">
               <span className="enquiry-inbox__hidden">Actions</span>
             </th>
@@ -26,9 +26,9 @@ export function EnquiryInbox() {
             <tr key={enquiry.id}>
               <th scope="row">{enquiry.name}</th>
               <td>{enquiry.phone}</td>
-              <td>{enquiry.destination}</td>
+              <td>{enquiry.service}</td>
               <td>{enquiry.date}</td>
-              <td>{enquiry.passengers}</td>
+              <td>{enquiry.message}</td>
               <td>
                 <button
                   className="link"

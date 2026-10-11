@@ -3,31 +3,34 @@
   min-height: 100vh;
   min-height: 100svh;
   /* The space at the foot is the coach's and the moon's: on a short screen the hero grows instead of the coach covering the words. */
-  padding: 6.5rem var(--gutter) calc(var(--scene-road) * 0.5 + var(--scene-bus-h) + 6rem);
+  padding: clamp(2.5rem, 7vh, 5rem) var(--gutter) calc(var(--scene-road) * 0.5 + var(--scene-bus-h) + 6rem);
   color: var(--white);
 }
 
-/* The name runs the full width, sized so the capitals reach both margins, with a rule beneath. */
-.hero__brand {
+/* the words keep to the page's content column */
+.hero__brand,
+.hero__words {
   position: relative;
-  padding-bottom: 0.1em;
-  border-bottom: 1px solid var(--dark-line-strong);
-  font: 300 calc((100vw - 2 * var(--gutter)) * 0.1195) / 1 var(--body);
-  letter-spacing: 0.06em;
+  width: min(var(--content), 100%);
+  margin-inline: auto;
+}
+
+/* the name is a small label over the headline */
+.hero__brand {
+  color: var(--dark-ink-soft);
+  font: 600 0.85rem var(--body);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .hero__words {
-  position: relative;
   display: grid;
   gap: 1rem;
-  max-width: 34rem;
-  margin-top: clamp(1.5rem, 4vh, 3rem);
+  margin-top: 0.75rem;
 }
 
 .hero__headline {
-  font: 300 clamp(1.5rem, 2.7vw, 2.4rem) / 1.25 var(--body);
+  font: 700 clamp(1.9rem, 4.4vw, 3.2rem) / 1.15 var(--body);
 }
 
 /* each line is a mask its text rises out of */
@@ -40,15 +43,7 @@
   display: block;
 }
 
-@media (min-width: 60rem) {
-  /* the links fit on one line here */
-  .hero {
-    padding-top: 5rem;
-  }
-}
-
 .hero__lede {
-  font: 0.72rem/1.8 var(--mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  max-width: 30rem;
+  font-weight: 500;
 }

@@ -8,7 +8,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 300 1.0625rem/1.6 var(--body);
+  font: 400 1.0625rem/1.6 var(--body);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,11 +38,17 @@ textarea {
 }
 
 h3 {
-  font: 400 1.75rem/1.15 var(--display);
+  margin-bottom: 0.75rem;
+  font: 600 1.25rem/1.25 var(--body);
 }
 
 strong {
-  font-weight: 500;
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
 :focus-visible {
@@ -50,61 +56,60 @@ strong {
   outline-offset: 3px;
 }
 
-/* An outlined button; the arrow box at the end fills when it is hovered. */
+/* a section that a link scrolled to takes focus, but is not a control */
+[tabindex='-1']:focus-visible {
+  outline: none;
+}
+
+/* A filled, rounded button with an arrow that steps forward when it is hovered. */
 .btn {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: center;
+  gap: 0.6rem;
   min-height: 3rem;
-  padding: 0 0.35rem 0 1.1rem;
-  border: 1px solid var(--ink);
-  background: none;
-  color: var(--ink);
-  font: 0.75rem var(--mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  padding: 0 1.4rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--brand);
+  box-shadow: var(--shadow-brand);
+  color: var(--on-brand);
+  font: 600 1rem var(--body);
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition:
-    background 0.2s,
-    color 0.2s;
+  transition: background 0.2s;
 }
 
 .btn::after {
-  content: '↗';
-  display: grid;
-  place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  background: var(--ink);
-  color: var(--paper);
-  font-size: 1rem;
-  letter-spacing: 0;
+  content: '→';
+  transition: transform 0.2s;
 }
 
 .btn:hover {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--accent);
+}
+
+.btn:hover::after {
+  transform: translateX(0.25rem);
 }
 
 .link {
   padding: 0;
   border: 0;
   background: none;
-  color: var(--ink);
-  font-weight: 400;
+  color: var(--accent-text);
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 0.2em;
   cursor: pointer;
 }
 
-/* Small labels are set in mono capitals throughout. */
+/* Small labels are set in bold capitals throughout. */
 label {
   display: grid;
-  gap: 0.2rem;
-  font: 0.72rem var(--mono);
+  gap: 0.35rem;
+  font: 600 0.72rem var(--body);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -116,13 +121,12 @@ textarea {
   width: 100%;
   /* lets a date field shrink inside a grid column on iOS */
   min-width: 0;
-  min-height: 2.75rem;
-  padding: 0;
-  border: 0;
-  border-bottom: 1px solid var(--line-strong);
-  border-radius: 0;
-  background: none;
-  font: 300 1.0625rem var(--body);
+  min-height: 3rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--field);
+  font: 500 1.0625rem var(--body);
   letter-spacing: 0;
   text-transform: none;
   color: var(--ink);
@@ -140,7 +144,7 @@ textarea {
 input[type='checkbox'] {
   width: 1.4rem;
   min-height: 1.4rem;
-  accent-color: var(--ink);
+  accent-color: var(--brand);
 }
 
 /* Rows of records. Wrap in an element with overflow-x: auto on narrow screens. */
@@ -159,7 +163,7 @@ input[type='checkbox'] {
 
 .data-table thead th {
   border-top: 0;
-  font: 0.72rem var(--mono);
+  font: 500 0.72rem var(--body);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -167,7 +171,8 @@ input[type='checkbox'] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn {
+  .btn,
+  .btn::after {
     transition: none;
   }
 }

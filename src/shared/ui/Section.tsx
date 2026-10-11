@@ -11,7 +11,7 @@ type SectionProps = {
   children: ReactNode
 }
 
-/** A page section: a large serif title, an indented lede, then the content. */
+/** A page section: a bold title, a lede under it, then the content. */
 export function Section({ id, title, lede, tone = 'light', children }: SectionProps) {
   return (
     <section id={id} className={tone === 'dark' ? 'section section--dark' : 'section'}>

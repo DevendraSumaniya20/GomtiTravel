@@ -1,40 +1,40 @@
 .section {
-  padding: clamp(4.5rem, 11vw, 9rem) var(--gutter);
+  padding: clamp(3.5rem, 8vw, 6rem) var(--gutter);
   background: var(--paper);
   color: var(--ink);
 }
 
+/* Every other band is tinted. The hero is the page's first section, so the odd ones here are the second, fourth and so on after it. */
+.section:nth-of-type(odd):not(.section--dark) {
+  --paper: var(--tint);
+}
+
 .section--dark {
   --paper: var(--dark-paper);
+  --surface: var(--dark-surface);
+  --tint: var(--dark-field);
+  --field: var(--dark-field);
   --ink: var(--dark-ink);
   --ink-soft: var(--dark-ink-soft);
   --line: var(--dark-line);
   --line-strong: var(--dark-line-strong);
+  --brand: var(--dark-brand);
+  --accent-text: var(--dark-accent-text);
   /* native date pickers and select menus follow */
   color-scheme: dark;
 }
 
 .section__inner {
-  max-width: 84rem;
+  max-width: var(--content);
   margin: 0 auto;
 }
 
 .section__title {
-  font: 300 clamp(2.9rem, 9vw, 7.4rem) / 0.95 var(--display);
-  text-transform: uppercase;
+  font: 700 clamp(1.75rem, 3.6vw, 2.5rem) / 1.15 var(--body);
 }
 
 .section__lede {
-  max-width: 44rem;
-  margin: 1.5rem 0 clamp(2.5rem, 6vw, 5rem);
-  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
-  line-height: 1.5;
-}
-
-@media (min-width: 60rem) {
-  /* the lede hangs to the right of the title, its first line indented further */
-  .section__lede {
-    margin-left: 26%;
-    text-indent: 11rem;
-  }
+  max-width: 40rem;
+  margin: 0.6rem 0 clamp(2rem, 4vw, 3rem);
+  color: var(--ink-soft);
 }

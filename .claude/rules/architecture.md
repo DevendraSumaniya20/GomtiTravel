@@ -13,10 +13,8 @@ Source dependencies point inward only: `app -> features -> shared`.
 | Feature | Owns |
 |---|---|
 | `journey` | The road scene (Dwarka coast, road, the coach driven by scroll) and the list of page sections |
-| `trips` | Routes, timetable, trip search, seat requests (make, look up, cancel, admin inbox) and fare quote |
-| `coaches` | Coach types and seat layouts |
-| `service` | What passengers get on board, boarding points, booking steps |
-| `contact` | The operator's contact details and charter enquiries |
+| `services` | What the desk offers: sleeper buses, darshan tours, rentals, train and flight booking |
+| `contact` | The owner's contact details and the enquiries left on the page (send, admin inbox) |
 
 ## Rules
 
@@ -24,9 +22,9 @@ Source dependencies point inward only: `app -> features -> shared`.
 - `model/` is plain TypeScript: no React, no DOM, no GSAP. Every non-trivial function there has a test beside it (`name.test.ts`).
 - `ui/` components take data and callbacks through props. They do not reach into another component's DOM.
 - State that two features need lives in `app/App.tsx` and is passed down.
-- Data that the admin can change is read through the feature's `api/` gateway, never from the `model/` constants, which are only the seed. Components read with the gateway's hook (`useRoutes()`) and write with its store.
+- Data that the admin can change is read through the feature's `api/` gateway, never from the `model/` constants, which are only the seed. Components read with the gateway's hook (`useContact()`) and write with its store.
 - There is no backend yet: gateways are backed by `shared/lib/localStore.ts` (this browser only). When a backend arrives, only the gateway changes: it calls the API and maps the response to the feature's model types. Hooks keep their shape, so components do not change.
-- Admin screens are composed in `app/AdminApp.tsx`. Lists are edited with `shared/ui/RecordEditor.tsx`; each feature supplies the fields and the form mapping from its `model/`.
+- Admin screens are composed in `app/AdminApp.tsx` from each feature's `ui/`.
 
 ## Adding a section to the page
 

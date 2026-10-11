@@ -6,11 +6,7 @@ export type Stop = {
 
 export const STOPS = [
   { id: 'start', label: 'Start' },
-  { id: 'routes', label: 'Routes' },
-  { id: 'fleet', label: 'Coaches' },
-  { id: 'onboard', label: 'On board' },
-  { id: 'boarding', label: 'Boarding' },
-  { id: 'book', label: 'Book' },
+  { id: 'services', label: 'Services' },
   { id: 'contact', label: 'Contact' },
 ] as const satisfies readonly Stop[]
 

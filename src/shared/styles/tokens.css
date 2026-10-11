@@ -1,41 +1,61 @@
 @import '@fontsource-variable/outfit/index.css';
-@import '@fontsource-variable/cormorant-garamond/index.css';
-@import '@fontsource/space-mono/400.css';
 
 /* The only file that names colours and fonts. Breakpoints: 44rem, 60rem. */
 :root {
-  /* page: warm paper and soft black */
-  --paper: #f7f3ec;
-  --ink: #2b2b2b;
-  --ink-soft: #6b6660;
-  --line: rgb(43 43 43 / 0.16);
-  --line-strong: rgb(43 43 43 / 0.45);
-  --accent: #b89b72;
+  /* page: blush paper, white cards, dark brown ink, deep red for fills and figures, bright red for the accent */
+  --paper: #fff8f7;
+  /* the face of a card */
+  --surface: #fff;
+  /* alternate sections and icon tiles */
+  --tint: #fff0ee;
+  /* the fill of a form field */
+  --field: #f4f6f9;
+  --ink: #2a1714;
+  --ink-soft: #5e3f3b;
+  --line: rgb(42 23 20 / 0.1);
+  --line-strong: rgb(42 23 20 / 0.45);
+  /* filled controls, and the text on them */
+  --brand: #b4000b;
+  --on-brand: #fff;
+  --accent: #e20613;
+  --on-accent: #fff;
+  /* red for text and figures; the dark band swaps in a pale one */
+  --accent-text: #b4000b;
   --white: #fff;
 
   /* the same roles on a dark band or over the dusk scene */
-  --dark-paper: #2b2b2b;
-  --dark-ink: #f7f3ec;
-  --dark-ink-soft: #bdb7ae;
-  --dark-line: rgb(247 243 236 / 0.2);
-  --dark-line-strong: rgb(247 243 236 / 0.55);
+  --dark-paper: #2a1714;
+  --dark-surface: #3a2421;
+  --dark-field: rgb(255 255 255 / 0.08);
+  --dark-ink: #fff8f7;
+  --dark-ink-soft: #fedad5;
+  --dark-line: rgb(254 218 213 / 0.16);
+  --dark-line-strong: rgb(254 218 213 / 0.55);
+  --dark-brand: #e20613;
+  --dark-accent-text: #ffb4ab;
+
+  /* shape and depth */
+  --radius: 0.875rem;
+  --radius-sm: 0.5rem;
+  --shadow: 0 0.75rem 2rem rgb(42 23 20 / 0.08);
+  --shadow-brand: 0 0.4rem 1rem rgb(180 0 11 / 0.25);
 
   /* the road scene: the bus leaves the Dwarka coast at dusk and arrives at dawn */
-  --sky-dusk: linear-gradient(#131a47, #4a2f73 40%, #a34b6e 62%, #e98452 80%);
+  --sky-dusk: linear-gradient(#1c0f0d, #3d1a1c 40%, #8c2b2b 64%, #e9764a 82%);
   --sky-dawn: linear-gradient(#8fb6de, #f6c7b6 55%, #ffe6bd 80%);
   --sun: radial-gradient(#fff6d6, #ffd36b 60%, #ffb347);
   --sun-glow: rgb(255 211 107 / 0.55);
   --moon: #f3f1e4;
   --moon-glow: rgb(243 241 228 / 0.35);
   --sea: linear-gradient(rgb(170 195 235 / 0.4), rgb(40 70 130 / 0.55));
-  --silhouette: #0a1430;
+  --silhouette: #1a0c0b;
   --ground: #0f2b2a;
   --asphalt: #262b33;
 
   /* bus */
   --bus-body-top: #fff;
   --bus-body-bottom: #d9dfe5;
-  --bus-livery: #0e7c7b;
+  --bus-livery: #b4000b;
   --bus-stripe: #f6a21e;
   --bus-glass-top: #0e1722;
   --bus-glass-bottom: #3b5269;
@@ -48,11 +68,10 @@
   --bus-shadow: rgb(0 0 0 / 0.38);
 
   /* type */
-  --display: 'Cormorant Garamond Variable', Georgia, serif;
   --body: 'Outfit Variable', system-ui, sans-serif;
-  --mono: 'Space Mono', ui-monospace, monospace;
 
   /* layout */
+  --content: 70rem;
   --gutter: clamp(1.25rem, 3.3vw, 3rem);
   /* The road scene scales from the coach drawing's width. It is capped by height too, so a landscape phone still fits it. */
   --scene-bus: min(118vw, 78rem, 220vh);

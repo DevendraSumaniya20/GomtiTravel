@@ -1,0 +1,33 @@
+.enquiry-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.enquiry-form h3 {
+  margin: 0;
+}
+
+.enquiry-form__result {
+  font-weight: 500;
+}
+
+.enquiry-form__result:empty {
+  display: none;
+}
+
+@media (min-width: 44rem) {
+  .enquiry-form {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .enquiry-form h3,
+  .enquiry-form__wide,
+  .enquiry-form__result {
+    grid-column: 1 / -1;
+  }
+
+  .enquiry-form .btn {
+    align-self: end;
+    justify-self: start;
+  }
+}
