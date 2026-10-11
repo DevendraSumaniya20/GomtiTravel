@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useContact } from '../features/contact/api/contactGateway.ts'
 import { ContactCard } from '../features/contact/ui/ContactCard.tsx'
 import { EnquiryForm } from '../features/contact/ui/EnquiryForm.tsx'
 import { STOPS, type StopId } from '../features/journey/model/stops.ts'
@@ -20,6 +21,7 @@ const LINKS = STOPS.slice(1)
 
 export function App() {
   useSmoothScroll()
+  const [phone] = useContact().phones
   // Shared by the service cards, which choose it, and the enquiry form, which shows it.
   const [serviceId, setServiceId] = useState('')
   // local date as YYYY-MM-DD, which is how the Canadian locale writes it
@@ -37,8 +39,8 @@ export function App() {
       <main>
         <Hero id="start" brand={BRAND} headline={HEADLINE} lede={LEDE} scene={<RoadScene time="dusk" arrive />} />
 
-        <Section id="services" title="What we do" lede={`Everything a traveller needs in ${ORIGIN}. Pick a service to ask about it.`}>
-          <ServiceList services={SERVICES} onEnquire={enquire} />
+        <Section id="services" title="What we do" lede={`Everything a traveller needs in ${ORIGIN}. Pick a service and call us about it.`}>
+          <ServiceList services={SERVICES} callHref={phone && `tel:+91${phone}`} onEnquire={enquire} />
         </Section>
 
         <div className="app__arrival">

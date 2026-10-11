@@ -4,11 +4,13 @@ import './ServiceList.css'
 
 type ServiceListProps = {
   services: readonly Service[]
+  /** A `tel:` link to the desk. Without one the button opens the enquiry form instead. */
+  callHref?: string
   onEnquire: (serviceId: string) => void
 }
 
-/** One card per service, each with a button that starts an enquiry about it. */
-export function ServiceList({ services, onEnquire }: ServiceListProps) {
+/** One card per service, each with a button that calls the desk about it. */
+export function ServiceList({ services, callHref, onEnquire }: ServiceListProps) {
   return (
     <ul className="service-list">
       {services.map((service) => (
@@ -25,9 +27,15 @@ export function ServiceList({ services, onEnquire }: ServiceListProps) {
               ))}
             </ul>
           )}
-          <button className="btn" onClick={() => onEnquire(service.id)} aria-label={`Enquire about ${service.title}`}>
-            Enquire
-          </button>
+          {callHref ? (
+            <a className="btn" href={callHref} aria-label={`Call to enquire about ${service.title}`}>
+              Call to enquire
+            </a>
+          ) : (
+            <button className="btn" onClick={() => onEnquire(service.id)} aria-label={`Enquire about ${service.title}`}>
+              Enquire
+            </button>
+          )}
         </li>
       ))}
     </ul>
