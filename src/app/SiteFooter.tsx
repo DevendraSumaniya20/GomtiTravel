@@ -32,7 +32,7 @@ export function SiteFooter({ brand, place, year, links }: SiteFooterProps) {
         <span>
           © {year} {brand}
         </span>
-        <a href="/admin.html">Admin</a>
+        <a href="admin.html">Admin</a>
       </div>
     </footer>
   )

@@ -24,7 +24,7 @@ export function AdminApp() {
               {section.label}
             </a>
           ))}
-          <a href="/">View the site</a>
+          <a href="./">View the site</a>
         </nav>
       </header>
 
