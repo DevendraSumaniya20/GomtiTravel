@@ -1,7 +1,10 @@
 /** The server answered with an error status, or could not be reached (status 0). */
 export class ApiError extends Error {
-  constructor(readonly status: number) {
+  readonly status: number
+
+  constructor(status: number) {
     super(`API request failed with status ${status}`)
+    this.status = status
   }
 }
 

@@ -86,6 +86,12 @@ app.delete('/api/enquiries/:id', adminOnly, async (request, response) => {
 app.use(express.static(fileURLToPath(new URL('../dist', import.meta.url))))
 
 app.use((error: unknown, _request: Request, response: Response, _next: NextFunction) => {
+  // express.json marks a malformed (400) or oversized (413) body; those are the client's fault, not ours
+  const status = (error as { status?: unknown } | null)?.status
+  if (typeof status === 'number' && status >= 400 && status < 500) {
+    response.sendStatus(status)
+    return
+  }
   console.error(error)
   response.sendStatus(500)
 })
