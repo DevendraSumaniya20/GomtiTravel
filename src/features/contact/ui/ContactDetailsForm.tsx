@@ -1,27 +1,30 @@
 import { useState, type FormEvent } from 'react'
-import { contactStore, useContact } from '../api/contactGateway.ts'
+import { saveContact, useContact } from '../api/contactGateway.ts'
 import { parsePhones } from '../model/contact.ts'
 import './ContactDetailsForm.css'
 
 /** Admin form for the details shown in the public contact card. Blank fields stay hidden on the site. */
 export function ContactDetailsForm() {
   const contact = useContact()
-  const [saved, setSaved] = useState(false)
+  const [status, setStatus] = useState('')
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const form = new FormData(event.currentTarget)
-    contactStore.write({
+    saveContact({
       owner: String(form.get('owner')).trim(),
       phones: parsePhones(String(form.get('phones'))),
       email: String(form.get('email')).trim(),
       address: String(form.get('address')).trim(),
-    })
-    setSaved(true)
+    }).then(
+      () => setStatus('Saved.'),
+      () => setStatus('Not saved. Check each mobile number has 10 digits, then try again.'),
+    )
   }
 
   return (
-    <form className="contact-details-form" onSubmit={submit} onChange={() => setSaved(false)}>
+    // keyed by the details, so the fields refill when the server's copy arrives
+    <form key={JSON.stringify(contact)} className="contact-details-form" onSubmit={submit} onChange={() => setStatus('')}>
       <label>
         Owner's name
         <input name="owner" autoComplete="off" defaultValue={contact.owner} />
@@ -39,7 +42,7 @@ export function ContactDetailsForm() {
         <input name="address" autoComplete="off" defaultValue={contact.address} />
       </label>
       <button className="btn">Save contact details</button>
-      <span role="status">{saved && 'Saved.'}</span>
+      <span role="status">{status}</span>
     </form>
   )
 }

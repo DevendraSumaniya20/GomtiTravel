@@ -39,7 +39,8 @@
   gap: 0 1.25rem;
 }
 
-.admin__nav a {
+.admin__nav a,
+.admin__nav button {
   display: flex;
   align-items: center;
   min-height: 2.75rem;

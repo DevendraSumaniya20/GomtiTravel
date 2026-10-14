@@ -22,8 +22,9 @@ Source dependencies point inward only: `app -> features -> shared`.
 - `model/` is plain TypeScript: no React, no DOM, no GSAP. Every non-trivial function there has a test beside it (`name.test.ts`).
 - `ui/` components take data and callbacks through props. They do not reach into another component's DOM.
 - State that two features need lives in `app/App.tsx` and is passed down.
-- Data that the admin can change is read through the feature's `api/` gateway, never from the `model/` constants, which are only the seed. Components read with the gateway's hook (`useContact()`) and write with its store.
-- There is no backend yet: gateways are backed by `shared/lib/localStore.ts` (this browser only). When a backend arrives, only the gateway changes: it calls the API and maps the response to the feature's model types. Hooks keep their shape, so components do not change.
+- Data that the admin can change is read through the feature's `api/` gateway, never from the `model/` constants, which are only the seed. Components read with the gateway's hook (`useContact()`).
+- Gateways call the server through `shared/lib/api.ts` and keep what it returned in a `shared/lib/store.ts` store, read with `useStore`. Components read with the gateway's hook and write with its functions (`saveContact`, `sendEnquiry`); they never call `fetch`.
+- `server/` is the Express + MySQL backend. It may import `src/features/*/model/` for types, seeds and pure logic, nothing else from `src/`. `server/schema.sql` is applied on start, so every statement must be safe to run again. Admin routes go through `adminOnly`; every request body is checked in `server/validate.ts`.
 - Admin screens are composed in `app/AdminApp.tsx` from each feature's `ui/`.
 
 ## Adding a section to the page

@@ -1,6 +1,6 @@
 # Gomtiji Tours & Travels
 
-Single-page site for a travel desk in Dwarka, Gujarat: daily sleeper buses, darshan tours, car and bike rental, train and flight booking. React + Vite + TypeScript, GSAP and Lenis for motion. Two pages: the public site (`index.html`) and the admin (`admin.html`). No backend and no sign-in yet; admin edits and enquiries are kept in the browser's localStorage behind each feature's `api/` gateway.
+Single-page site for a travel desk in Dwarka, Gujarat: daily sleeper buses, darshan tours, car and bike rental, train and flight booking. React + Vite + TypeScript, GSAP and Lenis for motion. Two pages: the public site (`index.html`) and the admin (`admin.html`). A small Express + MySQL server in `server/` stores the contact details and enquiries and serves the built pages; the admin signs in with one password (`ADMIN_PASSWORD` in `.env`). Each feature's `api/` gateway calls it.
 
 ## Rules
 
@@ -13,11 +13,12 @@ Read the rule file that covers what you are touching before editing.
 
 | Command | Purpose |
 |---|---|
-| `npm run dev` | Vite dev server |
+| `npm run dev` | Vite dev server (proxies `/api` to the server) |
+| `npm run server` | API and built site on port 3001; needs MySQL and `.env` (see `.env.example`) |
 | `npm run build` | typecheck and production build |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | oxlint |
-| `npm test` | unit tests for `model/` and `shared/lib/` logic |
+| `npm test` | unit tests for `model/`, `shared/lib/` and `server/` logic |
 
 ## Non-negotiables
 

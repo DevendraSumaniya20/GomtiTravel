@@ -1,13 +1,21 @@
-import { enquiriesStore, useEnquiries } from '../api/contactGateway.ts'
+import { useState } from 'react'
+import { removeEnquiry, useEnquiries } from '../api/contactGateway.ts'
 import './EnquiryInbox.css'
 
 /** Admin view of the enquiries left on the public page, newest first. */
 export function EnquiryInbox() {
   const enquiries = useEnquiries()
+  const [failed, setFailed] = useState(false)
   if (enquiries.length === 0) return <p>No enquiries yet.</p>
+
+  const handled = (id: string) => {
+    setFailed(false)
+    removeEnquiry(id).catch(() => setFailed(true))
+  }
 
   return (
     <div className="enquiry-inbox">
+      <p role="status">{failed && 'Could not remove the enquiry. Try again.'}</p>
       <table className="data-table">
         <thead>
           <tr>
@@ -22,7 +30,7 @@ export function EnquiryInbox() {
           </tr>
         </thead>
         <tbody>
-          {enquiries.toReversed().map((enquiry) => (
+          {enquiries.map((enquiry) => (
             <tr key={enquiry.id}>
               <th scope="row">{enquiry.name}</th>
               <td>{enquiry.phone}</td>
@@ -32,7 +40,7 @@ export function EnquiryInbox() {
               <td>
                 <button
                   className="link"
-                  onClick={() => enquiriesStore.write(enquiries.filter((other) => other.id !== enquiry.id))}
+                  onClick={() => handled(enquiry.id)}
                   aria-label={`Mark the enquiry from ${enquiry.name} as handled and remove it`}
                 >
                   Handled

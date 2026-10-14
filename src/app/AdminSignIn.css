@@ -1,0 +1,10 @@
+.admin-sign-in {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  max-width: 26rem;
+}
+
+.admin-sign-in label {
+  width: 100%;
+}

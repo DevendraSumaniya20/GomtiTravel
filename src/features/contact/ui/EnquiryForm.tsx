@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { PhoneField } from '../../../shared/ui/PhoneField.tsx'
-import { enquiriesStore } from '../api/contactGateway.ts'
+import { sendEnquiry } from '../api/contactGateway.ts'
 import './EnquiryForm.css'
 
 type EnquiryFormProps = {
@@ -13,26 +13,30 @@ type EnquiryFormProps = {
 
 /** Asks about one of the services: which one, who is asking, when, and anything else worth saying. */
 export function EnquiryForm({ services, serviceId, onServiceChange, today }: EnquiryFormProps) {
-  const [sentFor, setSentFor] = useState('')
+  const [result, setResult] = useState('')
+  const [sending, setSending] = useState(false)
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
+    const formElement = event.currentTarget
+    const form = new FormData(formElement)
     const name = String(form.get('name')).trim()
-    enquiriesStore.write([
-      ...enquiriesStore.read(),
-      {
-        id: crypto.randomUUID(),
+    setSending(true)
+    try {
+      await sendEnquiry({
         name,
         phone: String(form.get('phone')),
         service: services.find((service) => service.id === serviceId)?.title ?? '',
         date: String(form.get('date')),
         message: String(form.get('message')).trim(),
-        createdAt: new Date().toISOString(),
-      },
-    ])
-    setSentFor(name)
-    event.currentTarget.reset()
+      })
+      setResult(`Thank you, ${name}. Your enquiry has been sent.`)
+      formElement.reset()
+    } catch {
+      setResult('Sorry, the enquiry could not be sent. Please call instead.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -62,9 +66,11 @@ export function EnquiryForm({ services, serviceId, onServiceChange, today }: Enq
         Details (where to, how many people)
         <textarea name="message" rows={3} />
       </label>
-      <button className="btn">Send enquiry</button>
+      <button className="btn" disabled={sending}>
+        {sending ? 'Sending…' : 'Send enquiry'}
+      </button>
       <p className="enquiry-form__result" role="status">
-        {sentFor && `Thank you, ${sentFor}. This preview stores the enquiry in this browser only; to book now, please call.`}
+        {result}
       </p>
     </form>
   )
