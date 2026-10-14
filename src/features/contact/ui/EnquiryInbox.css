@@ -9,3 +9,11 @@
   overflow: hidden;
   clip-path: inset(50%);
 }
+
+.enquiry-inbox__new {
+  margin-left: 0.5rem;
+  color: var(--accent-text);
+  font: 600 0.72rem var(--body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}

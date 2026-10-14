@@ -21,8 +21,16 @@ export async function sendEnquiry(enquiry: Omit<Enquiry, 'id' | 'createdAt'>) {
   await api<Enquiry>('enquiries', 'POST', enquiry)
 }
 
-export async function loadEnquiries() {
-  enquiriesStore.write(await api<Enquiry[]>('enquiries'))
+let loaded = false
+
+/** Refreshes the inbox and returns the enquiries that arrived since the last refresh (none on the first). */
+export async function loadEnquiries(): Promise<Enquiry[]> {
+  const seen = new Set(enquiriesStore.read().map((enquiry) => enquiry.id))
+  const enquiries = await api<Enquiry[]>('enquiries')
+  enquiriesStore.write(enquiries)
+  const arrived = loaded ? enquiries.filter((enquiry) => !seen.has(enquiry.id)) : []
+  loaded = true
+  return arrived
 }
 
 export async function removeEnquiry(id: string) {

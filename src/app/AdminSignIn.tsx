@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { api, ApiError } from '../shared/lib/api.ts'
+import { unlockChime } from '../shared/lib/chime.ts'
 import './AdminSignIn.css'
 
 type AdminSignInProps = {
@@ -13,6 +14,8 @@ export function AdminSignIn({ onSignedIn }: AdminSignInProps) {
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    // signing in is a click, so the new-enquiry chime can play from here on
+    unlockChime()
     const password = String(new FormData(event.currentTarget).get('password'))
     setSending(true)
     setError('')

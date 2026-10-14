@@ -2,11 +2,18 @@ import { useState } from 'react'
 import { removeEnquiry, useEnquiries } from '../api/contactGateway.ts'
 import './EnquiryInbox.css'
 
+type EnquiryInboxProps = {
+  /** Enquiries that arrived while the page was open, marked as new. */
+  newIds: ReadonlySet<string>
+}
+
 /** Admin view of the enquiries left on the public page, newest first. */
-export function EnquiryInbox() {
+export function EnquiryInbox({ newIds }: EnquiryInboxProps) {
   const enquiries = useEnquiries()
   const [failed, setFailed] = useState(false)
   if (enquiries.length === 0) return <p>No enquiries yet.</p>
+
+  const newCount = enquiries.filter((enquiry) => newIds.has(enquiry.id)).length
 
   const handled = (id: string) => {
     setFailed(false)
@@ -15,7 +22,9 @@ export function EnquiryInbox() {
 
   return (
     <div className="enquiry-inbox">
-      <p role="status">{failed && 'Could not remove the enquiry. Try again.'}</p>
+      <p role="status">
+        {failed ? 'Could not remove the enquiry. Try again.' : newCount > 0 && `${newCount} new since you opened this page.`}
+      </p>
       <table className="data-table">
         <thead>
           <tr>
@@ -32,7 +41,10 @@ export function EnquiryInbox() {
         <tbody>
           {enquiries.map((enquiry) => (
             <tr key={enquiry.id}>
-              <th scope="row">{enquiry.name}</th>
+              <th scope="row">
+                {enquiry.name}
+                {newIds.has(enquiry.id) && <span className="enquiry-inbox__new">New</span>}
+              </th>
               <td>{enquiry.phone}</td>
               <td>{enquiry.service}</td>
               <td>{enquiry.date}</td>

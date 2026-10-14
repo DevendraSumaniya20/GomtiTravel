@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import { loadEnquiries } from '../features/contact/api/contactGateway.ts'
+import { useCallback, useEffect, useState } from 'react'
 import { ContactDetailsForm } from '../features/contact/ui/ContactDetailsForm.tsx'
 import { EnquiryInbox } from '../features/contact/ui/EnquiryInbox.tsx'
 import { api, ApiError } from '../shared/lib/api.ts'
 import { AdminSignIn } from './AdminSignIn.tsx'
+import { useEnquiryAlerts } from './useEnquiryAlerts.ts'
 import './AdminApp.css'
 
 type Session = 'checking' | 'signed-out' | 'signed-in' | 'offline'
@@ -25,15 +25,9 @@ export function AdminApp() {
     api('session').then(() => setSession('signed-in'), (failure: unknown) => setSession(sessionAfter(failure)))
   }, [])
 
-  useEffect(() => {
-    if (session !== 'signed-in') return
-    // An expired cookie shows up here as a 401, which returns the owner to the sign-in form.
-    const load = () => loadEnquiries().catch((failure: unknown) => setSession(sessionAfter(failure)))
-    load()
-    // Enquiries sent from another tab or phone appear when the owner comes back to this one.
-    window.addEventListener('focus', load)
-    return () => window.removeEventListener('focus', load)
-  }, [session])
+  const lost = useCallback((failure: unknown) => setSession(sessionAfter(failure)), [])
+  // An expired cookie shows up as a 401, which returns the owner to the sign-in form.
+  const { newIds, alerts, turnOnAlerts } = useEnquiryAlerts(session === 'signed-in', lost)
 
   const signOut = () => api('session', 'DELETE').finally(() => setSession('signed-out'))
 
@@ -41,6 +35,9 @@ export function AdminApp() {
     <div className="admin">
       <header className="admin__header">
         <h1>Gomtiji Tours &amp; Travels admin</h1>
+        {session === 'signed-in' && alerts === 'denied' && (
+          <p className="admin__notice">Alerts are blocked. To get them, allow notifications for this site in the browser's settings.</p>
+        )}
         {session === 'offline' && (
           <p className="admin__notice">The server could not be reached. Start it with npm run server, then reload this page.</p>
         )}
@@ -51,6 +48,11 @@ export function AdminApp() {
             </a>
           ))}
           <a href="./">View the site</a>
+          {session === 'signed-in' && alerts === 'default' && (
+            <button className="link" onClick={turnOnAlerts}>
+              Turn on alerts
+            </button>
+          )}
           {session === 'signed-in' && (
             <button className="link" onClick={signOut}>
               Sign out
@@ -65,7 +67,7 @@ export function AdminApp() {
           <>
             <section id={enquiries.id} className="sheet pane">
               <h2>{enquiries.label}</h2>
-              <EnquiryInbox />
+              <EnquiryInbox newIds={newIds} />
             </section>
 
             <section id={contact.id} className="sheet pane">
