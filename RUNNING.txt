@@ -1,0 +1,167 @@
+GOMTIJI TOURS & TRAVELS - HOW TO RUN THE PROJECT
+=================================================
+
+What runs where
+---------------
+- The website (index.html) and the admin (admin.html) are a React app built by Vite.
+- The backend is an Express server in server/. It stores the contact details and the
+  enquiries in MySQL, and it also serves the built website.
+- Everything runs on one address: http://localhost:3001
+    Website: http://localhost:3001
+    Admin:   http://localhost:3001/admin.html
+
+
+1. WHAT YOU NEED (once per computer)
+------------------------------------
+- Node.js 24 or newer (this Mac has 26). Check:      node -v
+- MySQL server. On this Mac it is installed at /usr/local/mysql and starts by itself.
+  Check that it is running:                          nc -z 127.0.0.1 3306 && echo running
+
+
+2. FIRST-TIME SETUP (once per computer)
+---------------------------------------
+Run every command from the project folder:
+
+    cd ~/Desktop/gomtiTravel
+
+Step 2.1  Install the packages:
+
+    npm install
+
+Step 2.2  Create the settings file .env from the example:
+
+    cp .env.example .env
+
+Then open .env in a text editor and fill in:
+
+    DATABASE_URL=mysql://gomti:DB_PASSWORD@127.0.0.1:3306/gomti
+    ADMIN_PASSWORD=the password you will type on the admin page
+    SESSION_SECRET=at least 32 random characters
+    PORT=3001
+
+Make a SESSION_SECRET with:
+
+    node -e "console.log(crypto.randomBytes(32).toString('hex'))"
+
+.env holds passwords. It is listed in .gitignore, so it is never pushed. Do not share it.
+
+Step 2.3  Create the database and its user. Replace DB_PASSWORD with the same password
+you put in DATABASE_URL. MySQL asks for its root password:
+
+    /usr/local/mysql/bin/mysql -uroot -p -e "CREATE DATABASE IF NOT EXISTS gomti; CREATE USER IF NOT EXISTS 'gomti'@'localhost' IDENTIFIED BY 'DB_PASSWORD'; CREATE USER IF NOT EXISTS 'gomti'@'127.0.0.1' IDENTIFIED BY 'DB_PASSWORD'; GRANT ALL ON gomti.* TO 'gomti'@'localhost'; GRANT ALL ON gomti.* TO 'gomti'@'127.0.0.1';"
+
+The tables (contact, enquiries) are created by the server itself the first time it starts.
+On this Mac, steps 2.2 and 2.3 are already done.
+
+
+3. RUN THE PROJECT (every day)
+------------------------------
+Step 3.1  Go to the project folder:
+
+    cd ~/Desktop/gomtiTravel
+
+Step 3.2  Build the website and start the server:
+
+    npm run build && npm run server
+
+Wait until it prints:
+
+    API on http://localhost:3001
+
+Step 3.3  Open in the browser:
+
+    Website: http://localhost:3001
+    Admin:   http://localhost:3001/admin.html   (sign in with ADMIN_PASSWORD from .env)
+
+Keep the Terminal window open; closing it stops the server.
+To stop the server: press Ctrl + C in that Terminal window.
+
+You only need "npm run build" again after changing code under src/. If only the server
+should restart, "npm run server" is enough.
+
+
+4. WORKING ON THE CODE (developer mode)
+---------------------------------------
+Use two Terminal windows, both in ~/Desktop/gomtiTravel:
+
+    Window 1:  npm run server
+    Window 2:  npm run dev
+
+Then open the address "npm run dev" prints (usually http://localhost:5173). Changes to
+the website show up at once without a rebuild. Calls to /api go to the server in window 1.
+
+Before pushing, all four checks must pass:
+
+    npm run typecheck     TypeScript types
+    npm run lint          code style (oxlint)
+    npm test              unit tests
+    npm run build         production build
+
+Push:
+
+    git add -A
+    git commit -m "Describe the change"
+    git push origin travel-desk
+
+
+5. USING THE ADMIN
+------------------
+- Sign in with ADMIN_PASSWORD from .env. To see it:   grep ADMIN_PASSWORD .env
+  To change it: edit the line in .env, then restart the server.
+- Enquiries: newest first. "Handled" removes one.
+- New enquiries: the page checks every 20 seconds. A new one plays a chime, is marked
+  NEW, and shows "(1 new)" in the tab title while you are in another tab.
+- Click "Turn on alerts" once and allow notifications to get a system notification too.
+  Sound works after you click the page once (signing in counts).
+- Contact details: what the website's contact card shows. Mobile numbers are one per line.
+
+
+6. LOOK AT THE DATA IN MYSQL
+----------------------------
+MySQL asks for its root password:
+
+    /usr/local/mysql/bin/mysql -uroot -p gomti -e "SELECT * FROM enquiries ORDER BY created_at DESC;"
+    /usr/local/mysql/bin/mysql -uroot -p gomti -e "SELECT * FROM contact;"
+
+The contact table is empty until the details are saved once in the admin; until then the
+website shows the details from the shop's signboard.
+
+
+7. PROBLEMS AND FIXES
+---------------------
+"Access denied for user 'gomti'@'localhost'" when the server starts
+    The password in DATABASE_URL in .env does not match the gomti user in MySQL, or the
+    user does not exist. Run step 2.3 again with the password from DATABASE_URL.
+
+"ERROR 1045 Access denied for user 'root'@'localhost'"
+    Wrong MySQL root password. If it is forgotten, it can be reset with sudo (your Mac
+    login password): stop MySQL, start it once with an --init-file that runs
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'new-password'; then start it normally.
+
+"sudo: Sorry, try again."
+    sudo wants your Mac login password, not a MySQL password. Nothing shows while typing.
+
+"Set DATABASE_URL, ADMIN_PASSWORD and SESSION_SECRET ..."
+    .env is missing or incomplete. Do step 2.2.
+
+"EADDRINUSE" or the page shows an old version
+    Another server already uses port 3001. Find and stop it:
+        lsof -iTCP:3001 -sTCP:LISTEN
+        kill <PID from the list>
+
+Admin says "Wrong password."
+    Use ADMIN_PASSWORD from .env. If you just changed it, restart the server.
+
+Admin says "The server could not be reached."
+    The server is not running. Do section 3.
+
+Website says "the enquiry could not be sent. Please call instead."
+    The server is not running, or you opened the GitHub Pages copy, which has no backend.
+    Use http://localhost:3001.
+
+
+8. GITHUB PAGES
+---------------
+Pushing to travel-desk or main publishes the website to GitHub Pages. That copy has no
+server: it shows the signboard contact details, and its enquiry form asks people to call.
+A host that runs Node.js and MySQL is needed for the live site to store enquiries.
